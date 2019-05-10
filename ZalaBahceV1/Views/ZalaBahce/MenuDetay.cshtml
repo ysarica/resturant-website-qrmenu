@@ -1,0 +1,125 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Urun>
+@{
+    ViewBag.Title = "MenuDetay";
+}
+
+ <!--========== PROMO BLOCK ==========-->
+<div class="js__parallax-window" style="background: url(/img/hakkimizda/hheader.jpg) 50% 0 no-repeat fixed;">
+    <div class="g-container--md g-text-center--xs g-padding-y-30--xs">
+        <div class="g-margin-b-60--xs">
+            <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-70--md g-color--white g-letter-spacing--1 g-margin-b-30--xs">HAKKIMIZDA</h1>
+        </div>
+
+    </div>
+</div>
+<!--========== END PROMO BLOCK ==========-->
+
+@foreach (var i in Model)
+{
+    <!-- Services -->
+<div class="container g-padding-y-80--xs g-padding-y-125--sm">
+    <div class="row g-margin-b-10--xs">
+        <div class="col-md-6 g-margin-b-60--xs g-margin-b-0--lg">
+            <!-- Masonry Grid -->
+            <!--========== SWIPER SLIDER ==========-->
+            <div class="s-swiper js__swiper-slider" style="height:500px">
+                <!-- Swiper Wrapper -->
+                <div class="swiper-wrapper">
+                    <div class="s-promo-block-v4 g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('@i.kapakResim');">
+                    </div>
+                    @foreach (var r in ViewBag.UrunResim)
+                    {
+                    <div class="s-promo-block-v4 g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('@r.resim');">                  
+                   
+                    </div>
+                    }
+
+                </div>
+                <!-- End Swiper Wrapper -->
+                <!-- Pagination -->
+                <div class="s-swiper__pagination-v1 s-swiper__pagination-v1--bc s-swiper__pagination-v1--white js__swiper-pagination"></div>
+            </div>
+            <!--========== END SWIPER SLIDER ==========-->
+            <!-- End Masonry Grid -->
+        </div>
+        <div class="col-md-5 g-margin-b-10--xs g-margin-b-0--lg g-margin-t-10--lg g-margin-l-20--lg">
+            <div class="g-margin-b-30--xs">
+                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-15--xs">@i.UrunKategori.baslik</p>
+                <h2 class="g-font-size-32--xs g-font-size-36--sm">@i.urunAd</h2>
+                <p>@Html.Raw(i.aciklama)</p>
+            </div>
+       
+        </div>
+    </div>
+</div>
+<!-- End Services -->
+}
+<!-- Clients -->
+<div class="g-container--md g-padding-y-80--xs g-padding-y-100--sm">
+    <!-- Swiper Clients -->
+    <div class="s-swiper js__swiper-clients">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="wow fadeIn" data-wow-duration=".3" data-wow-delay=".1s">
+                    <img class="s-clients-v1" src="~/img/marka/doğa.fw.png" alt="Clients Logo">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wow fadeIn" data-wow-duration=".3" data-wow-delay=".2s">
+                    <img class="s-clients-v1" src="~/img/marka/maret.fw.png" alt="Clients Logo">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wow fadeIn" data-wow-duration=".3" data-wow-delay=".3s">
+                    <img class="s-clients-v1" src="~/img/marka/sek.fw.png" alt="Clients Logo">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wow fadeIn" data-wow-duration=".3" data-wow-delay=".4s">
+                    <img class="s-clients-v1" src="~/img/marka/torku.fw.png" alt="Clients Logo">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wow fadeIn" data-wow-duration=".3" data-wow-delay=".4s">
+                    <img class="s-clients-v1" src="~/img/marka/banvit.fw.png" alt="Clients Logo">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wow fadeIn" data-wow-duration=".3" data-wow-delay=".5s">
+                    <img class="s-clients-v1" src="~/img/marka/monın.fw.png" alt="Clients Logo">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Swiper Clients -->
+</div>
+<!-- End Clients -->
+<!-- Feedback Form -->
+@*<div class="g-bg-color--sky-light">
+    <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+        <div class="g-text-center--xs g-margin-b-80--xs">
+            <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Ürün Hakkında</p>
+            <h2 class="g-font-size-32--xs g-font-size-36--md">Şikayet Öneriler</h2>
+        </div>
+        <form>
+            <div class="row g-margin-b-40--xs">
+                <div class="col-sm-6 g-margin-b-20--xs g-margin-b-0--md">
+                    <div class="g-margin-b-20--xs">
+                        <input type="text" class="form-control s-form-v2__input g-radius--50" placeholder="* Name">
+                    </div>
+                    <div class="g-margin-b-20--xs">
+                        <input type="email" class="form-control s-form-v2__input g-radius--50" placeholder="* Email">
+                    </div>
+                    <input type="text" class="form-control s-form-v2__input g-radius--50" placeholder="* Phone">
+                </div>
+                <div class="col-sm-6">
+                    <textarea class="form-control s-form-v2__input g-radius--10 g-padding-y-20--xs" rows="8" placeholder="MESAJ"></textarea>
+                </div>
+            </div>
+            <div class="g-text-center--xs">
+                <button type="submit" class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-80--xs">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>*@
+<!-- End Feedback Form -->

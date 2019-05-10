@@ -1,0 +1,31 @@
+﻿
+@model IEnumerable<ZalaBahceV1.Models.UrunKategori>
+<div class="container-fluid g-padding-y-80--xs g-padding-y-50--sm">
+    <div class="g-text-center--xs g-margin-b-80--xs">
+        <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">Menü</p>
+        <p>İstanbul Boğazının Keyfini Bizimle Yaşayın<br>Yöresel ve Geniş Menümüzle Sizlerleyiz</p>
+    </div>
+    <!-- Swiper -->
+    <div class="s-swiper js__swiper-news">
+        <!-- Wrapper -->
+        <div class="swiper-wrapper g-margin-b-60--xs">
+            @foreach(var i in Model)
+            {
+                <article class="s-promo-block-v6 g-bg-position--center swiper-slide" style="background: url(@i.resim);">
+                    <div class="g-text-center--xs g-padding-x-15--xs g-padding-x-30--lg g-padding-y-50--xs g-margin-t-120--xs">
+                        <div class="g-margin-b-25--xs">
+                            <h3 class="g-font-size-16--xs g-color--white g-margin-b-5--xs">@i.baslik</h3>
+                            <p class="g-color--white">@i.aciklama</p>
+                        </div>
+                        <a href="/ZalaBahce/Menu?kategoriID=@i.kategoriID" class="text-uppercase s-btn s-btn--xs s-btn--white-brd g-radius--50">Menüye Gidin</a>
+                    </div>
+                </article>
+            }
+     
+        </div>
+        <!-- End Wrapper -->
+        <!-- Pagination -->
+        <div class="s-swiper__pagination-v1 s-swiper__pagination-v1--dark g-text-center--xs js__swiper-pagination"></div>
+    </div>
+    <!-- End Swiper -->
+</div>

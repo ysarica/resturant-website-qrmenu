@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "Kategori";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@section Baslik{ KATEGORİ AYARLARI }
+@section sitemap{KATEGORİ AYARLARI }
+@section title{KATEGORİ AYARLARI }
+@model IEnumerable<ZalaBahceV1.Models.UrunKategori>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-info card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    URUN KATEGORİ LİSTESİ
+                    <small>Düzenleme ve Silme İşlemleri Buradan Yapılır</small>
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    @*<button type="button" class="btn btn-tool btn-sm"
+                                data-widget="remove"
+                                data-toggle="tooltip"
+                                title="Remove">
+                            <i class="fa fa-times"></i>
+                        </button>*@
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="mb-3">
+
+                    @*------------content start------------*@
+
+
+                    <table id="urunkatliste" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Kategori</th>
+                                <th width="5%">Resim</th>
+                                <th width="41%">Aciklama</th>
+
+                                <th width="33%">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model)
+                            {
+
+
+                                <tr>
+                                    <td>@i.kategoriID</td>
+                                    <td>@i.baslik </td>
+                                    <td><img src="@i.resim" height="45" width="45" /> </td>
+                                    <td>@i.aciklama</td>
+
+                                    <td align="center">
+                                        <div class="btn-group">
+                                            <a href="/Admin/KategoriDuzenle?kategoriID=@i.kategoriID" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
+                                            <a id="btnAlert" href="/Admin/KategoriSil?kategoriID=@i.kategoriID" class="btn btn-danger"><i class="fa fa-trash"></i> Sil</a>
+                                        </div>
+                                    </td>
+
+
+
+
+                                </tr>  }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Kategori</th>
+                                <th width="5%">Resim</th>
+                                <th width="41%">Aciklama</th>
+
+                                <th width="33%">İşlem</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @*--------------content end--------------*@
+                </div>
+                <p class="text-sm mb-0">
+
+                </p>
+            </div>
+        </div>
+
+        @*------------card end----------------*@
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    URUN KATEGORİ EKLE
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                 
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+             @Html.Action("_KategoriEkle","Admin")
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------card end----------------*@
+

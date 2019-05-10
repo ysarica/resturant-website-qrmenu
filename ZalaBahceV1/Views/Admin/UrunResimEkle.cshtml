@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "UrunResimEkle";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@model ZalaBahceV1.Models.Urun
+
+@section Baslik{ URUN EKLE 3/2}
+@section sitemap{URUN EKLE 3/2 }
+@section title{URUN RESİM EKLE }
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    URUN RESİM EKLE 3/3
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                 
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                @*<div class="mb-3">*@
+
+                @*------------content start------------*@
+
+                @using (Html.BeginForm("UrunResimEkle", "Admin", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(m => m.urunID)
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2"><dt>Ürün Resim: </dt></div>
+                                <div class="col-md-10">
+                                    <input type="file" name="resim" id="resim" class="form-control" />
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-10"></div>
+                                <div class="col-md-2">
+                                    <input type="submit" value="Resim Ekle" class="btn btn-primary btn-lg col-md-12" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            @Html.Action("UrunResimListele", "Admin", Model.urunID)
+                        </div>
+
+                        @if (Request.QueryString["liste"] != null || Session["lst"].ToString() == "1")
+                        {
+                            <a href="/Admin/UrunEkle" class="btn btn-lg btn-primary">Listeye Geri Dön</a>
+                            Session["lst"] = 1;
+
+                        }
+                        else
+                        {
+                            <a href="/Admin/UrunDetay?urunID=@Model.urunID" class="btn btn-lg btn-primary">Devam Et</a>
+                        }
+                    </div>
+                }
+                @*--------------content end--------------*@
+                @*</div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+

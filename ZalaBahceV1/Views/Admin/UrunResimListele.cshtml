@@ -1,0 +1,30 @@
+﻿
+@model List<ZalaBahceV1.Models.UrunResim>
+
+<p>
+</p>
+<div class="timeline-item">
+
+
+    <div class="timeline-body">
+        <div class="row">
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="col-md-2">
+                        <div class="row center">
+                            <div class="col-md-12">
+                                <center><img height="150" width="200" src="@item.resim" alt="..." class="margin"></center>
+                            </div>
+                            <div class="col-md-12"><center><a href="/Admin/resimSil?urunID=@item.urunID&id=@item.resimID" class="btn btn-danger"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></center></div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+

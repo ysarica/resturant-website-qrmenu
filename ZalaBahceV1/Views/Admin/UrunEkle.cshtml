@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "UrunEkle";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+    Session["lst"] = 0;
+
+}
+
+<h2>UrunEkle</h2>
+
+@section Baslik{ URUN EKLE 3/1 }
+@section sitemap{URUN EKLE 3/1 }
+@section title{URUN AYARLARI }
+@model ZalaBahceV1.Models.Urun
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    URUN  EKLE
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    @*<button type="button" class="btn btn-tool btn-sm"
+                                data-widget="remove"
+                                data-toggle="tooltip"
+                                title="Remove">
+                            <i class="fa fa-times"></i>
+                        </button>*@
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                @*<div class="mb-3">*@
+
+                @*------------content start------------*@
+
+
+                @using (Html.BeginForm("UrunEkle", "Admin", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2"><dt>Kategori Seçiniz : </dt></div>
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.katID, ViewBag.Kategoriler as IEnumerable<SelectListItem>, "Kategori Seçiniz", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-2"><dt>Ürün Adı: </dt></div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.urunAd, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-md-2"><dt>Ürün Özet Açıklaması: </dt></div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.aciklamaOzet, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-2"><dt>Kapak Foroğrafı Seçiniz : </dt></div>
+                            <div class="col-md-10">
+                                <input type="file" name="resim" id="resim" class="form-control" />
+
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-2"><dt>Ürün Açıklaması: </dt></div>
+                            <div class="col-md-10">
+                                <textarea id="aciklama" name="aciklama" style="width: 100%">Ürün Açıklamasını Buraya Giriniz</textarea>
+
+
+                            </div>
+                        </div>
+                        <hr />
+                    
+
+
+
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <input type="submit" value="Devam Et" class="btn btn-primary btn-lg col-md-12" />
+                            </div>
+                        </div>
+                        <hr />
+
+                        <hr />
+                    </div>
+
+                }
+
+                <div>
+                    @Html.ActionLink("Listeye geri dön", "Urun")
+                </div>
+
+
+                @*--------------content end--------------*@
+                @*</div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script>
+            $(function () {
+
+                ClassicEditor
+                .create(document.querySelector('#aciklama'))
+                .then(function (editor) {
+                    // The editor instance
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+            })
+    </script>
+
+
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@*------------card end----------------*@
