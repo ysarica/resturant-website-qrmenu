@@ -1,0 +1,5 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Sayfalar>
+    @foreach (var item in Model)
+    {
+        <li><a class="g-font-size-15--xs g-color--white-opacity" href="/ZalaBahce/Sayfa?SaID=@item.SaID">@item.baslik</a></li>
+    }

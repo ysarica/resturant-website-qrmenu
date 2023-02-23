@@ -12,13 +12,12 @@ namespace ZalaBahceV1.Models
         [Key]
         public int YID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string resim { get; set; }
 
-        [StringLength(50)]
         public string yorum { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string adSoyad { get; set; }
     }
 }

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Rezervasyon>
+@using ZalaBahceV1.Models;
+@{  
+    ZalaDB db = new ZalaDB();
+    double t = Convert.ToDouble(DateTime.Now.ToString("yyyy/MM/dd"));
+    List<Rezervasyon> okunmamislist = db.Rezervasyon.Where(x => x.okundu == "Onaylanmamis").ToList();
+    foreach (var i in okunmamislist.OrderBy(x => x.pTarih))
+    {
+        if (Convert.ToDouble(i.pTarih) > t)
+        {
+            
+        }
+    }
+}
+
+ <!-- Messages Dropdown Menu -->
+<li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="fa fa-comments-o"></i>
+        <span class="badge badge-danger navbar-badge">@ViewBag.rezsayi</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        @foreach (var i in okunmamislist.OrderBy(x => x.pTarih))
+        {
+            if (Convert.ToDouble(i.pTarih) > t)
+            {
+            <a href="/Mesaj/Onaylanmamis/" class="dropdown-item">
+                <!-- Message Start -->
+                <div class="media">
+                    <img src="/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                    <div class="media-body">
+                        <h3 class="dropdown-item-title">
+                            @i.adsoyad
+                            <span class="float-right text-sm text-danger"><i class="fa fa-star"></i></span>
+                        </h3>
+                        <p class="text-sm">@i.hizmet</p>
+                        <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i>@i.tarih</p>
+                    </div>
+                </div>
+                <!-- Message End -->
+            </a>
+            <div class="dropdown-divider"></div>
+            }
+
+        }
+        <a href="/Mesaj/Onaylanmamis/" class="dropdown-item dropdown-footer">Tüm Rezervasyonları Gör</a>
+    </div>
+</li>
+<!-- Notifications Dropdown Menu -->

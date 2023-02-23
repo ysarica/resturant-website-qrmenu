@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Hizmetler>
+
+
+            @{int a = 0; }
+
+
+
+@foreach (var i in Model)
+{
+    a++;
+    if (a < 5)
+    {
+        <ul class="list-unstyled col-xs-4 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
+            <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>@i.ad</li>
+        </ul>
+    }
+    else
+    {
+        <ul class="list-unstyled col-xs-4 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
+            <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>@i.ad</li>
+            
+        </ul>
+    }
+
+
+
+
+}
+

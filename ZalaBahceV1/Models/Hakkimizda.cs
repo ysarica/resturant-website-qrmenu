@@ -12,23 +12,23 @@ namespace ZalaBahceV1.Models
         [Key]
         public int HID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string baslik1 { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string baslik2 { get; set; }
 
         public string ozet { get; set; }
 
-        public string aciklama { get; set; }
-
-        [StringLength(50)]
+        [StringLength(150)]
         public string resim1 { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string resim2 { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string resim3 { get; set; }
+
+        public string hskkimizda { get; set; }
     }
 }

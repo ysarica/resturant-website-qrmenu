@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Sayac>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<div class="card card-dark">
+    <div class="card-header">
+        <h3 class="card-title">Yıllık Ziyaretçi</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="chart">
+            <canvas id="myChart3" height="100"></canvas>
+        </div>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->
+<script>
+
+
+
+
+
+    var ctx = document.getElementById('myChart3').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                @{ZalaBahceV1.Models.ZalaDB dba = new ZalaBahceV1.Models.ZalaDB();
+                           var yillara = (from yils in dba.Sayac select yils.yil).Distinct();
+                         foreach (var i in yillara)
+                          {
+                               @:@i ,
+                          }
+                        }
+
+            ],
+            datasets: [
+              {
+                    label: 'Yıllık Ziyaret',
+                  data: [
+                       @{ZalaBahceV1.Models.ZalaDB db = new ZalaBahceV1.Models.ZalaDB();
+                           var yillar = (from yils in db.Sayac select yils.yil).Distinct();
+                         foreach (var i in yillar)
+                          {
+                            int toplam = Convert.ToInt32(db.Sayac.Where(x =>x.yil == i).Sum(x => x.sayi));
+
+                               @:@toplam ,
+                          }
+                        }
+
+                  ]
+              },
+
+            ]
+
+        },
+
+
+        options: {
+            //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+            scaleBeginAtZero: true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines: true,
+            //String - Colour of the grid lines
+            scaleGridLineColor: 'rgba(0,0,0,.05)',
+            //Number - Width of the grid lines
+            scaleGridLineWidth: 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines: true,
+            //Boolean - If there is a stroke on each bar
+            barShowStroke: true,
+            //Number - Pixel width of the bar stroke
+            barStrokeWidth: 2,
+            //Number - Spacing between each of the X value sets
+            barValueSpacing: 5,
+            //Number - Spacing between data sets within X values
+            barDatasetSpacing: 1,
+            //String - A legend template
+            legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+            //Boolean - whether to make the chart responsive
+            responsive: true,
+            maintainAspectRatio: true,
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

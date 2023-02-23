@@ -1,0 +1,341 @@
+﻿
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> S R C | Geçici Kategori Ekle</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="/plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="/plugins/fullcalendar/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap4.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+
+    <script src="/plugins/chartjs-old/Chart.min.js"></script>
+
+
+
+    <script src="/dist/sweetalert2.all.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+
+
+    <link href="/dist/sweetalert2.css" rel="stylesheet" />
+</head>
+@model IEnumerable<ZalaBahceV1.Models.UrunKategori>
+@using ZalaBahceV1.Models;
+@{
+    ZalaDB db = new ZalaDB();
+}
+<body>
+    <div class="row">
+        <a href="/Gecici/UrunListe/" class="btn btn-primary">Ürün Ayarları</a>
+        <a href="/Gecici/KategoriListe/" class="btn btn-primary">Kategori Ayarları</a>
+    </div>
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 class="card-title">Ürün Liste</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#KategoriEkle">Kategori Ekle</button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+
+            <table id="urunkatliste" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th width="5%">Kategori Adı</th>
+                        <th width="5%">Kategori Açıklama</th>
+                        <th width="5%">Resim</th>
+                        <th width="50%">İşlemler</th>
+
+                    </tr>
+                </thead>
+                @foreach (var i in Model)
+            {
+                    <tr>
+                        <td>@i.baslik</td>
+                        <td>@i.aciklama</td>
+                        <td><img src="@i.resim" width="45" height="45" /></td>
+                        <td align="center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#KategoriBilgi-@i.kategoriID"><i class="fa fa-info-circle"></i></button>
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#KategoriDuzenle-@i.kategoriID"><i class="fa fa-pencil-square-o"></i>Düzenle</button>
+                                @*<a href="/Urun/UrunResimEkle?urunID=@i.urunID&liste=1&urunAd=@i.urunAd" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i>Resim Düzenle</a>*@  
+                                <a id="btnAlert" href="/Gecici/_KategoriSil?kategoriID=@i.kategoriID" class="btn btn-danger"><i class="fa fa-trash"></i>Sil</a>
+                            </div>
+                        </td>
+                        <!-- Ürün Bilgi  Modal -->
+                        <div class="modal fade bd-example-modal-lg" id="KategoriBilgi-@i.kategoriID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Kategori Detay</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12">
+                                                <div class="info-box bg-light">
+                                                    <div class="info-box-content">
+                                                        <img class="d-block w-100" src="@i.resim" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12">
+                                                <div class="info-box bg-light">
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text text-center text-muted">Ürün Adı</span>
+                                                        <span class="info-box-number text-center text-muted mb-0">@i.baslik</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12">
+                                                <div class="info-box bg-light">
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text text-center text-muted">Açıklama</span>
+                                                        <span class="info-box-number text-center text-muted mb-0">@i.aciklama</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                                        <button type="submit" class="btn btn-warning">Güncelle</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ürün Düzenle  Modal Son-->
+                        <!-- Ürün Düzenle  Modal -->
+                        <div class="modal fade bd-example-modal-lg" id="KategoriDuzenle-@i.kategoriID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Ürün Düzenle @i.baslik</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    @using (Html.BeginForm("_KategoriGuncelle", "Gecici", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+                                    {<input type="text" style="display:none;" class="form-control" id="kategoriID" name="kategoriID" value="@i.kategoriID">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="customFile">Kategori Resim:</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="attachment" id="attachment" value="@i.resim">
+                                                    <label class="custom-file-label" for="customFile">Eklemek İstediğiniz Resmi Seçiniz</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Kategori Adı:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Kategori Adı Giriniz..." id="baslik" name="baslik" value="@i.baslik">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Ürün Açıklama:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                    </div>
+                                                    <textarea type="text" class="form-control" placeholder="Kategori Açıklama Giriniz..." id="aciklama" name="aciklama">@i.aciklama</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                                            <button type="submit" class="btn btn-warning">Güncelle</button>
+                                        </div>
+                                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ürün Düzenle  Modal Son-->
+                    </tr>
+                                                    }
+                <tfoot>
+                    <tr>  
+                        <th width="5%">Kategori Adı</th>
+                        <th width="5%">Kategori Açıklama</th>
+                        <th width="5%">Resim</th>
+                        <th width="50%">İşlemler</th>
+
+                    </tr>
+                </tfoot>
+            </table>
+
+
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+    <!-- Ürün Ekle  Modal -->
+    <div class="modal fade bd-example-modal-lg" id="KategoriEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Ürün Ekle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Html.BeginForm("_KategoriEkle", "Gecici", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+            {
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="customFile">Kategori Resim:</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="attachment" id="attachment">
+                                <label class="custom-file-label" for="customFile">Eklemek İstediğiniz Resmi Seçiniz</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Kategori Adı:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Kategori Adı Giriniz..." id="baslik" name="baslik">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Kategori Açıklama:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                </div>
+                                <textarea type="text" class="form-control" placeholder="Kategori Açıklama Giriniz..." id="aciklama" name="aciklama"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                        <button type="submit" class="btn btn-primary">Ekle</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+  $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="/plugins/morris/morris.min.js"></script>
+    <!-- Sparkline -->
+    <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="/plugins/knob/jquery.knob.js"></script>
+    <!-- daterangepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="/plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/dist/js/adminlte.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="/dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/dist/js/demo.js"></script>
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <!-- DataTables -->
+    <script src="/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/plugins/datatables/dataTables.bootstrap4.js"></script>
+
+    <script src="/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="/plugins/select2/js/select2.full.min.js"></script>
+
+
+
+
+
+
+
+
+    <script>
+            $(function () {
+
+                $('#urunkatliste').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true
+                });
+
+                $('#dene').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true
+                });
+            });
+    </script>
+    <script>
+        $(function () {
+            //Add text editor
+            $('#Mesaj').summernote()
+            $('.select2').select2()
+            $('[data-mask]').inputmask()
+
+        })
+
+    </script>
+</body>

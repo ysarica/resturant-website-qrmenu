@@ -18,6 +18,8 @@ namespace ZalaBahceV1
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "ZalaBahce", action = "Hosgeldiniz", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }

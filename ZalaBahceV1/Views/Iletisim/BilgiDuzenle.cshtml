@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "BilgiDuzenle";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model ZalaBahceV1.Models.iletisim
+@section Baslik{ İLETİSİM DUZENLE }
+@section sitemap{İLETİSİM DUZENLE }
+@section title{İLETİSİM DUZENLE}
+
+@using (Html.BeginForm("BilgiDuzenle", "Iletisim", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                       İLETİSİM BİLGİ DÜZENLE
+                    </h3>
+                    <!-- tools box -->
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool btn-sm"
+                                data-widget="collapse"
+                                data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        @*<button type="button" class="btn btn-tool btn-sm"
+                                    data-widget="remove"
+                                    data-toggle="tooltip"
+                                    title="Remove">
+                                <i class="fa fa-times"></i>
+                            </button>*@
+                    </div>
+                    <!-- /. tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @*<div class="mb-3">*@
+
+                    @*------------content start------------*@
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
+
+                
+                    <div class="row">
+                        <div class="col-md-2"><dt>Başlık </dt></div>
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.baslik, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.baslik, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-md-2"><dt>Mail </dt></div>
+                        <div class="col-md-10">
+                         @Html.EditorFor(model => model.mail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Telefon </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.telefon, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.telefon, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Adres </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.adres, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Harita Link </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.harita, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Whatsapp No: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.wpNo, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Whatsapp Mesajı: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.wpMesaj, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Güncelleştir" class="btn btn-warning btn-lg" />
+                        </div>
+                    </div>
+                    @*--------------content end--------------*@
+                    @*</div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*------------card end----------------*@
+
+}
+
+<div>
+</div>
+@section script{
+    <script>
+            $(function () {
+
+                ClassicEditor
+                .create(document.querySelector('#aciklama'))
+                .then(function (editor) {
+                    // The editor instance
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+            })
+    </script>
+
+
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

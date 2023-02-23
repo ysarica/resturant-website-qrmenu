@@ -1,0 +1,12 @@
+﻿
+@model IEnumerable<ZalaBahceV1.Models.iletisim>
+
+@foreach (var i in Model)
+{
+    <section class="s-google-map">
+        <div id="js__google-container" class="s-google-container g-height-400--xs">
+            <iframe src="@i.harita" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </section>
+}
+

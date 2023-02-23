@@ -18,11 +18,14 @@ namespace ZalaBahceV1.Models
         [StringLength(50)]
         public string Port { get; set; }
 
-        [Column("Mail")]
+        [Column("mail")]
         [StringLength(50)]
-        public string Mail1 { get; set; }
+        public string mail1 { get; set; }
 
         [StringLength(50)]
         public string Sifre { get; set; }
+
+        [StringLength(50)]
+        public string secili { get; set; }
     }
 }

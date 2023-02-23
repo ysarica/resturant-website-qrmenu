@@ -24,5 +24,11 @@ namespace ZalaBahceV1.Models
         public string telefon { get; set; }
 
         public string harita { get; set; }
+
+        [StringLength(50)]
+        public string wpNo { get; set; }
+
+        [StringLength(250)]
+        public string wpMesaj { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace ZalaBahceV1.Models
         [Key]
         public int resimID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string resim { get; set; }
 
         [StringLength(50)]

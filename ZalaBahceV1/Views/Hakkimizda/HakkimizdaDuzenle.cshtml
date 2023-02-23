@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "HakkimizdaDuzenle";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@model ZalaBahceV1.Models.Hakkimizda
+@section Baslik{ HAKKIMIZDA AYARLARI }
+@section sitemap{HAKKIMIZDA DUZENLE }
+@section title{HAKKIMIZDA DUZENLE}
+
+@using (Html.BeginForm("HakkimizdaDuzenle", "Hakkimizda", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        HAKKIMIZDA DÜZENLE
+                    </h3>
+                    <!-- tools box -->
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool btn-sm"
+                                data-widget="collapse"
+                                data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                      
+                    </div>
+                    <!-- /. tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @*<div class="mb-3">*@
+
+                    @*------------content start------------*@
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.HID)
+
+             
+                    <div class="row">
+                        <div class="col-md-2"><dt>Hakkimizda Baslik: </dt></div>
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.baslik1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.baslik1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Hakkımızda Slogan: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.baslik2, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Hakkımızda Yazısı </dt></div>
+                        <div class="col-md-10">
+                            <textarea id="hskkimizda" name="hskkimizda" style="width: 100%">@Model.hskkimizda</textarea>
+                        </div>
+                    </div>
+                    
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Anasayfa Hakkimizda Özet: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ozet, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Anasayfa Hakkımızda Foto 1 : (Önerilen Boyut:400x550)</dt></div>
+                        <div class="col-md-10">
+                            <input type="file" name="resim1" id="resim1" class="form-control" />
+                            <img src="@Model.resim1" height="300" width="300" />
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Anasayfa Hakkımızda Foto 2 : (Önerilen Boyut:970x647)</dt></div>
+                        <div class="col-md-10">
+                            <input type="file" name="resim2" id="resim2" class="form-control" />
+                            <img src="@Model.resim2" height="300" width="300" />
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2">
+                        <dt>Anasayfa Hakkımızda Foto 3 : (Önerilen Boyut:970x647)</dt></div>
+                         <div class="col-md-10">
+                    <input type="file" name="resim3" id="resim3" class="form-control" />
+                             <img src="@Model.resim3" height="300" width="300" />
+    </div>
+</div>
+<hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Güncelleştir" class="btn btn-warning btn-lg" />
+                        </div>
+                    </div>
+                    @*--------------content end--------------*@
+                    @*</div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*------------card end----------------*@
+
+}
+
+@section script{
+    <script>
+            $(function () {
+
+                ClassicEditor
+                .create(document.querySelector('#hskkimizda'))
+                .then(function (editor) {
+                    // The editor instance
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+            })
+    </script>
+
+
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

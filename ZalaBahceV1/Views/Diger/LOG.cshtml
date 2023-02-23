@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "LOG";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model IEnumerable<ZalaBahceV1.Models.Log>
+
+@section Baslik{LOG}
+@section sitemap{LOG}
+@section title{LOG}
+<div class="row">
+@using ZalaBahceV1.Models;
+
+@{
+    ZalaDB db = new ZalaDB();
+    List<Log> slist = db.Log.ToList();
+
+}
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    LOG
+                    <small>Yapılan İşlem Kayıtlarına Buradan Ulaşılır
+                 
+                    
+                      </small>
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="mb-3">
+                    <table id="urunkatliste" class="table table-bordered table-striped table-responsive">
+                        <thead>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Tarih</th>
+                                <th width="5%">Sorumlu</th>
+                                <th width="41%">Olay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model.OrderBy(x=> x.ID))
+                            {
+                                <tr>
+                                    <td>@i.ID</td>
+                                    <td>@i.Tarih </td>
+                                    <td>@i.Kim</td>
+                                    <td>@i.Olay</td>
+                                   
+                                </tr> 
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Tarih</th>
+                                <th width="5%">Sorumlu</th>
+                                <th width="41%">Olay</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @*--------------content end--------------*@
+                </div>
+                <p class="text-sm mb-0">
+
+                </p>
+            </div>
+        </div>
+
+        @*------------card end----------------*@
+    </div>
+</div>
+

@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "ResimDuzenle";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model ZalaBahceV1.Models.Galeri
+
+
+@section Baslik{ GALERİ AYARLARI }
+@section sitemap{GALERİ AYARLARI }
+@section title{GALERİ AYARLARI }
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-warning card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    RESİM DÜZENLE
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                  
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+                @*------------content start------------*@
+
+
+
+                @using (Html.BeginForm("ResimDuzenle", "Galeri", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.ID)
+
+
+                    <div class="row">
+                        <div class="col-md-2"><dt>Resim Baslik: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Baslik, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Resim Aciklama: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.aciklama, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                      
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-2"><dt>Slayt Resim: </dt></div>
+                            <div class="col-md-10">
+                                <div class="col-md-12">
+                                    <center>
+                                        <img class="d-block w-100" height="200" width="400" src="@Model.resim" alt="">
+                                    </center>
+                                </div>
+                                <div class="col-md-12"><input type="file" name="resim" id="resim" class="form-control" /></div>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <input type="submit" value="Güncelle" class="btn btn-warning btn-lg col-md-12" />
+                            </div>
+                        </div>
+
+
+
+
+                        @*--------------content end--------------*@
+                        @*</div>*@
+
+
+                }
+            </div>
+        </div>
+    </div>
+
+    @*------------card end----------------*@
+    </div>
+
+

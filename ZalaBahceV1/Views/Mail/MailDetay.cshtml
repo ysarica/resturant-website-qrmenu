@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "MailDetay";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model ZalaBahceV1.Models.GonderilenMail
+@section Baslik{ MAİL DETAY }
+@section sitemap{MAİL DETAY }
+@section title{MAİL DETAY}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Action("_Menu", "Mail")
+
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">MAİL DETAY</h3>
+
+                        <div class="card-tools">
+     
+                            <a href="/Mail/MailDetay?ID=@Convert.ToUInt32(Model.ID+1)" class="btn btn-tool" data-toggle="tooltip" title="Previous"><i class="fa fa-chevron-left"></i></a>
+                            <a href="/Mail/MailDetay?ID=@Convert.ToUInt32(Model.ID-1)" class="btn btn-tool" data-toggle="tooltip" title="Next"><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="mailbox-read-info">
+                            <h5>@Model.konu</h5>
+                            <h6>
+                                From:@Model.gönderilen
+                                <span class="mailbox-read-time float-right">@Model.tarih</span>
+                            </h6>
+                        </div>
+                       
+                        <div class="mailbox-read-message">
+                           @Html.Raw(Model.mail)
+                        </div>
+                        <!-- /.mailbox-read-message -->
+                    </div>
+                    <!-- /.card-body -->
+                  
+                    <!-- /.card-footer -->
+                    <div class="card-footer">
+                      
+                        <a href="/Mail/MailSil?ID=@Model.ID" class="btn btn-default"><i class="fa fa-trash-o"></i> Sil</a>
+                      
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /. box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+</section>
+

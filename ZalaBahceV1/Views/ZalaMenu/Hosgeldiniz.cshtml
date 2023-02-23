@@ -1,0 +1,143 @@
+﻿﻿
+@{
+    Layout = null;
+}
+@model IEnumerable<ZalaBahceV1.Models.UrunKategori>
+@using ZalaBahceV1.Models;
+@{
+    ZalaDB db = new ZalaDB();
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Zala Bahçe | QR Menü</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/css/menu/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="/css/menu/icomoon.css">
+    <!-- Themify Icons-->
+    <link rel="stylesheet" href="/css/menu/themify-icons.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/css/menu/bootstrap.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="/css/menu/magnific-popup.css">
+    <!-- Bootstrap DateTimePicker -->
+    <link rel="stylesheet" href="/css/menu/bootstrap-datetimepicker.min.css">
+
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="/css/menu/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/menu/owl.theme.default.min.css">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="/css/menu/style.css">
+    <!-- Modernizr JS -->
+    <script src="/js/menu/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <div class="gtco-loader"></div>
+
+    <div id="page">
+        <div class="gtco-section">
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+                        <h2 class="cursive-font primary-color" style="font-family:Calibri; font-size:100px; font-weight:bold;">Zala Bahçe Menü</h2>
+                        <p style="font-size:30px;">Yemeğin keyfini Zala Bahçe'de Çıkarın.</p>
+                        <h3 class="primary-color" style="font-size:50px;">Kategoriler</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var a in Model.OrderByDescending(x=> x.sira))
+                    {
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <a href="/ZalaMenu/Menus?Kategori=@a.kategoriID">
+                                <figure>
+                                    <img src="@a.resim" alt="Image" class="img-responsive" style="min-height:460px;">
+                                </figure>
+                                <a href="/ZalaMenu/Menus?Kategori=@a.kategoriID" class="fh5co-card-item ">
+                                    <div class="fh5co-text">
+                                        <h2 style="font-size:40px;">@a.baslik</h2>
+                                    </div>
+                                </a>
+                            </a>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        @*<footer id="gtco-footer" role="contentinfo" style="background-image: url(images/img_bg_1.jpg)" data-stellar-background-ratio="0.5">
+                <div class="overlay"></div>
+                <div class="gtco-container">
+                    <div class="row row-pb-md">
+
+
+                        <div class="col-md-12 text-center">
+                            <div class="gtco-widget">
+                                <h3>Get In Touch</h3>
+                                <ul class="gtco-quick-contact">
+                                    <li><a href="#"><i class="icon-phone"></i> +1 234 567 890</a></li>
+                                    <li><a href="#"><i class="icon-mail2"></i> info@GetTemplates.co</a></li>
+                                    <li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
+                                </ul>
+                            </div>
+                            <div class="gtco-widget">
+                                <h3>Get Social</h3>
+                                <ul class="gtco-social-icons">
+                                    <li><a href="#"><i class="icon-twitter"></i></a></li>
+                                    <li><a href="#"><i class="icon-facebook"></i></a></li>
+                                    <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center copyright">
+                            <p>
+                                <small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
+                                <small class="block">Designed by <a href="http://gettemplates.co/" target="_blank">GetTemplates.co</a> Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </footer>*@
+        <!-- </div> -->
+    </div>
+    <!-- jQuery -->
+    <script src="/js/menu/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="/js/menu/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="/js/menu/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="/js/menu/jquery.waypoints.min.js"></script>
+    <!-- Carousel -->
+    <script src="/js/menu/owl.carousel.min.js"></script>
+    <!-- countTo -->
+    <script src="/js/menu/jquery.countTo.js"></script>
+    <!-- Stellar Parallax -->
+    <script src="/js/menu/jquery.stellar.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="/js/menu/jquery.magnific-popup.min.js"></script>
+    <script src="/js/menu/magnific-popup-options.js"></script>
+
+    <script src="/js/menu/moment.min.js"></script>
+    <script src="/js/menu/bootstrap-datetimepicker.min.js"></script>
+
+    <!-- Main -->
+    <script src="/js/menu/main.js"></script>
+
+</body>
+</html>

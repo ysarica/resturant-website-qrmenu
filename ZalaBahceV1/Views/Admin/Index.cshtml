@@ -1,0 +1,255 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model IEnumerable<ZalaBahceV1.Models.GelenMesaj>
+@section Baslik{ BAŞLANGIÇ }
+@section sitemap{BAŞLANGIÇ }
+@section title{BAŞLANGIÇ }
+
+<div class="row">
+    @if (Session["Yetki"].ToString() == "Yetkili")
+    {
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@ViewBag.urunsayi</h3>
+
+                    <p>Sistemdeki Toplam Ürün Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="/Urun/UrunListe" class="small-box-footer">Ürünlere Git <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    }
+
+
+    
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@ViewBag.anketsayi</h3>
+
+                <p>Sistemdeki Toplam Anket Sayısı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="/Mesaj/AnketListe" class="small-box-footer">Anketlere Git<i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@ViewBag.rezsayi</h3>
+
+                <p>Toplam Rezervasyon Sayısı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="/Mesaj/Hosgeldiniz/ " class="small-box-footer">Rezervasyonlara Git <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@ViewBag.msjsayi</h3>
+
+                <p>Toplam Mesaj Sayısı</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="/Mesaj/MesajListe/" class="small-box-footer">Mesajlara Git <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+@if (Session["Yetki"].ToString() == "Yetkili")
+{
+<div class="row">
+   
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-info " href="/Mail/GonderilenMail"><i class="fa fa-envelope-o"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Gönderilen Mailler</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-success" href="/Mail/MailGonder"><i class="fa fa-envelope-o"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Mail Gönder</span>
+
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-warning" href="/Mail/MailDB"><i class="fa fa-files-o"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Mail Veritabanı</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-danger" href="/Iletisim/Sosyal"><i class="fa fa-instagram"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Sosyal Medya Ayarları</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-info " href="/Urun/UrunListe/"><i class="fa fa-cart-plus"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Ürün Ekle</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-success" href="/Iletisim/BilgiDuzenle?ID=1"><i class="fa fa-phone"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">İletişim Ayarları</span>
+
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-warning" href="/Sayfa/SayfaEkle"><i class="fa fa-file-o"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Sayfa Ekle</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-danger" href="/Galeri/ResimEkle"><i class="fa fa-file-image-o"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Galeri Resim Ekle</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="row">
+
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-info " href="/Slayt/SlaytEkle"><i class="fa fa-picture-o"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Slayt Ekle</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-success" href="/Diger/Markalar"><i class="fa fa-certificate"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Marka Ekle</span>
+
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-warning" href="/Admin/SiteAyar"><i class="fa fa-cogs"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Site Ayarları</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-danger" href="/Hizmetler/Index"><i class="fa fa-newspaper-o"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Hizmet Ekle</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+</div>
+}
+<div class="row">
+    <div class="col-12">@Html.Action("_ZiyaretciBilgi", "Diger")</div>
+    <div class="col-12">@Html.Action("_ZiyaretçiGünlük", "Diger")</div>
+    <div class="col-6">@Html.Action("_ZiyaretçiAylik", "Diger")</div>
+    <div class="col-6">@Html.Action("_ZiyaretçiYillik", "Diger")</div>
+</div>
+
+
+
+
+
+
+
+
+
+

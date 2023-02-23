@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "SayfaListele";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@section Baslik{ SAYFA AYARLARI }
+@section sitemap{SAYFA AYARLARI }
+@section title{SAYFA AYARLARI }
+@model IEnumerable<ZalaBahceV1.Models.Sayfalar>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    SAYFA LİSTESİ
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    @*<button type="button" class="btn btn-tool btn-sm"
+                                data-widget="remove"
+                                data-toggle="tooltip"
+                                title="Remove">
+                            <i class="fa fa-times"></i>
+                        </button>*@
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                @*<div class="mb-3">*@
+
+                @*------------content start------------*@
+
+                <table id="urunkatliste" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th width="12%">Başlık</th>
+                            <th width="10%">Slogan</th>
+                            <th width="10%">Yer</th>
+                          
+                            <th width="3%">Durum</th>
+                            <th width="20%">İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var a in ViewBag.hks)
+                        {
+                            <tr>
+                                <td>@a.baslik1</td>
+                                <td>@a.baslik2 </td>
+                                <td>üstmenü</td>
+                                <td>
+                                   
+                                        <span class="badge bg-success ">Aktif</span>
+                                 
+                              
+                                </td>
+                                <td align="center">
+                                    <div class="btn-group">
+                                        <a href="/Hakkimizda/HakkimizdaDuzenle?HID=1" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i>Sayfa Düzenle</a>
+                                     
+                                            <a href="#" class="btn btn-danger disabled"><i class="fa fa-minus-square"></i>Pasif Yap</a>
+                                      
+                                     
+                                        <a id="btnAlert" href="#" class="btn btn-danger disabled"><i class="fa fa-trash"></i>Sayfa Sil</a>
+                                    </div>
+                                </td>
+                            </tr>  }
+
+
+                        @foreach (var i in Model)
+                        {
+
+
+                            <tr>
+
+                                <td>@i.baslik</td>
+                                <td>@i.baslik2 </td>
+                                <td>@i.yer</td>      
+                                <td>
+                                    @if (i.aktif == "aktif")
+                                    {
+                                        <span class="badge bg-success ">Aktif</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Pasif</span>
+
+                                    }
+                                </td>
+
+                                <td align="center">
+                                    <div class="btn-group">
+                                        <a href="/Sayfa/SayfaDuzenle?SaID=@i.SaID" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i>Sayfa Düzenle</a>
+                                        @if (i.aktif == "aktif")
+                                        {
+                                            <a href="/Sayfa/SayfaDurum?SaID=@i.SaID" class="btn btn-danger"><i class="fa fa-minus-square"></i>Pasif Yap</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Sayfa/SayfaDurum?SaID=@i.SaID" class="btn btn-success"><i class="fa fa-plus"></i>Aktif Yap</a>
+
+                                        }
+                                        <a id="btnAlert" href="/Sayfa/SayfaSil?SaID=@i.SaID" class="btn btn-danger"><i class="fa fa-trash"></i>Sayfa Sil</a>
+                                    </div>
+                                </td>
+
+
+
+
+                            </tr>  }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th width="12%">Başlık</th>
+                            <th width="10%">Slogan</th>
+                            <th width="10%">Yer</th>
+
+                            <th width="3%">Durum</th>
+                            <th width="20%">İşlem</th>
+
+                        </tr>
+                    </tfoot>
+                </table>
+
+                @*--------------content end--------------*@
+                @*</div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------card end----------------*@
+
+
+
+
+
+

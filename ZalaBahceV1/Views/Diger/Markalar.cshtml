@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "Markalar";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@section Baslik{ MARKA AYARLARI }
+@section sitemap{MARKA AYARLARI }
+@section title{MARKA AYARLARI }
+@model IEnumerable<ZalaBahceV1.Models.Markalar>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-info card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    MARKA LİSTESİ
+                    <small>Düzenleme ve Silme İşlemleri Buradan Yapılır</small>
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                 
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="mb-3">
+
+                    @*------------content start------------*@
+
+
+                    <table id="urunkatliste" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Marka Adı</th>
+                                <th width="5%">Resim</th>
+                                <th width="33%">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model)
+                            {
+
+
+                                <tr>
+                                    <td>@i.MID</td>
+                                    <td>@i.markaAd</td>
+                                    <td><img src="@i.markaResim" height="45" width="45" /> </td>
+
+                                    <td align="center">
+                                        <div class="btn-group">
+                                            <a href="/Diger/MarkaDuzenle?MID=@i.MID" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
+                                            <a id="btnAlert" href="/Diger/MarkaSil?MID=@i.MID" class="btn btn-danger"><i class="fa fa-trash"></i> Sil</a>
+                                        </div>
+                                    </td>
+
+
+
+
+                                </tr>  }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Marka Adı</th>
+                                <th width="5%">Resim</th>
+                                <th width="33%">İşlem</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @*--------------content end--------------*@
+                </div>
+                <p class="text-sm mb-0">
+
+                </p>
+            </div>
+        </div>
+
+        @*------------card end----------------*@
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    MARKA EKLE
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                @Html.Action("_MarkaEkle", "Diger")
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------card end----------------*@

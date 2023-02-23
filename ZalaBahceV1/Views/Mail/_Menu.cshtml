@@ -1,0 +1,47 @@
+﻿<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Seçenekler</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a href="/Mail/GonderilenMail" class="nav-link">
+                    <i class="fa fa-inbox"></i> Gönderilen
+                    <span class="badge bg-primary float-right">@ViewBag.mailsayi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Mail/MailGonder" class="nav-link">
+                    <i class="fa fa-envelope-o"></i> Mail Gönder
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Mail/TopluMailGonder" class="nav-link">
+                    <i class="fa fa-users"></i> Toplu Mail Gönder
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Mail/CCListe" class="nav-link">
+                    <i class="fa fa-assistive-listening-systems"></i> CC Mail
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/Mail/MailAyar" class="nav-link">
+                    <i class="fa fa-wrench"></i> Gönderici Mail Ayarları
+                </a>
+            </li>
+            <li class="nav-item">
+         <a href="/Mail/MailDB" class="nav-link">
+        <i class="fa fa-file-text-o"></i> Mail Veritabanı
+        <span class="badge bg-warning float-right">@ViewBag.maildbsayi</span>
+    </a>
+</li>
+        </ul>
+    </div>
+    <!-- /.card-body -->
+</div>

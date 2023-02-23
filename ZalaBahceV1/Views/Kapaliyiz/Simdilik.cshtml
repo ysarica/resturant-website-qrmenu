@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "Simdilik";
+    Layout = null;
+
+}
+@model IEnumerable<ZalaBahceV1.Models.iletisim>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<!-- Begin Head -->
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>ZALA BAHÇE | Tarabyanın Parlayan Yıldızı</title>
+    <meta name="keywords" content="tarabya,Cafe,Resturant,Zala,Bahçe,ZalaBahçe,istanbul,latte,kahvaltı,mocha,pizza" />
+    <meta name="description" content="Zala Bahçe, Sarıyer Tarabya'da bir hayalin neticesinde, siz değerli konuklarına eşsiz sunumları, damağınıza hitap edecek farklı tatları ve tabiki kendinizi huzurlu ve rahat hissedebileceğiniz iç ve dış mekanı ile hizmet vermek üzere kurulmuştur.">
+    <meta name="author" content="Yasin SARICA">
+    <!-- Web Fonts -->
+    <!-- Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+    <!-- Vendor Styles -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/themify/themify.css" rel="stylesheet" type="text/css" />
+    <link href="/vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css" />
+    <!-- Theme Styles -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/global/global.css" rel="stylesheet" type="text/css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+</head>
+<!-- End Head -->
+<!-- Body -->
+@foreach (var a in Model)
+{
+<body>
+    <!--========== HEADER ==========-->
+    <header class="navbar-fixed-top s-header js__header-overlay">
+        <!-- Navbar -->
+        <div class="s-header__navbar">
+            <div class="s-header__container">
+                <div class="s-header__navbar-row">
+                    <div class="s-header__navbar-row-col">
+                        <!-- Logo -->
+                        <div class="s-header__logo text-center">
+                            <a href="index.html" class="s-header__logo-link">
+                                <img class="s-header__logo-img" src="~/Resim/Site/zalalogo2.png" alt="ZALA BAHÇE">
+                            </a>
+                        </div>
+                        <!-- End Logo -->
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar -->
+       
+    </header>
+    <!--========== END HEADER ==========-->
+    <!--========== PAGE CONTENT ==========-->
+    <div class="g-bg-position--center g-fullheight--xs" style="background: url('/img/1920x1080/08.jpg');">
+        <div class="container js__ver-center-aligned">
+            <div class="g-text-center--xs">
+                <div class="g-margin-t-40--xs g-margin-b-60--xs g-margin-b-80--sm">
+                    <h1 class="g-font-size-32--xs g-font-size-50--sm g-font-size-60--md g-margin-b-30--xs">Şimdilik Kapalıyız</h1>
+                    <p class="text-uppercase g-font-size-20--md g-font-weight--300">İletişim Bilgilerinden Bize Ulaşabilirsiniz</p>
+                </div>
+                <div class="row g-row-col--5 g-margin-b-80--xs">
+                    <div class="col-xs-4 g-full-width--xs g-margin-b-50--xs g-margin-b-0--sm">
+                        <div class="g-text-center--xs">
+                            <i class="g-display-block--xs g-font-size-40--xs g-color--dark-light g-margin-b-30--xs ti-map-alt"></i>
+                            <h4 class="g-font-size-18--xs g-color--dark-light g-margin-b-5--xs">Adres</h4>
+                            <p class="g-color--dark-light">@a.adres</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 g-full-width--xs g-margin-b-50--xs g-margin-b-0--sm">
+                        <div class="g-text-center--xs">
+                            <i class="g-display-block--xs g-font-size-40--xs g-color--dark-light g-margin-b-30--xs ti-headphone-alt"></i>
+                            <h4 class="g-font-size-18--xs g-color--dark-light g-margin-b-5--xs">Telefon</h4>
+                            <p class="g-color--dark-light">@a.telefon</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 g-full-width--xs">
+                        <div class="g-text-center--xs">
+                            <i class="g-display-block--xs g-font-size-40--xs g-color--dark-light g-margin-b-30--xs ti-email"></i>
+                            <h4 class="g-font-size-18--xs g-color--dark-light g-margin-b-5--xs">Mail</h4>
+                            <p class="g-color--dark-light">@a.mail</p>
+                        </div>
+                    </div>
+
+                    @*@foreach (var i in ViewBag.sosyal)
+                    {
+                        <div class="col-xs-4 g-full-width--xs">
+                            <div class="g-text-center--xs">
+                                <i class="g-display-block--xs g-font-size-40--xs g-color--dark-light g-margin-b-30--xs ti-@i.icon"></i>
+                                <h4 class="g-font-size-18--xs g-color--dark-light g-margin-b-5--xs">@i.ad</h4>
+                                <a href="@i.link" class="g-color--dark-light">@i.link</a>
+                            </div>
+                        </div>
+                    }*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="s-google-map">
+        <div id="js__google-container" class="s-google-container g-height-400--xs">
+            <iframe src="@a.harita" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </section>
+    <!--========== END PAGE CONTENT ==========-->
+    <!--========== JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) ==========-->
+    <!-- Vendor -->
+    <script type="text/javascript" src="/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery.migrate.min.js"></script>
+    <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery.smooth-scroll.min.js"></script>
+    <script type="text/javascript" src="/vendor/scrollbar/jquery.scrollbar.min.js"></script>
+    <!-- General Components and Settings -->
+    <script type="text/javascript" src="/js/global.min.js"></script>
+    <script type="text/javascript" src="/js/components/scrollbar.min.js"></script>
+    <!--========== END JAVASCRIPTS ==========-->
+</body>
+}<!-- End Body -->
+</html>

@@ -20,9 +20,16 @@
     <link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Date Picker -->
     <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="~/Content/PagedList.css">
+
     <!-- Daterange picker -->
     <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker-bs3.css">
     <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="/plugins/fullcalendar/fullcalendar.print.css" media="print">
     <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -31,6 +38,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/dist/css/adminlte.min.css">
 
+    <script src="/plugins/chartjs-old/Chart.min.js"></script>
 
 
 
@@ -55,11 +63,12 @@
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/Home/Index" class="nav-link">Başlangıç</a>
+                    <a href="/Admin/Index" class="nav-link">Başlangıç</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/Kullanici/Index" class="nav-link">Şifre Değiştir</a>
+                    <a href="" class="nav-link">@DateTime.Now.ToShortDateString()</a>
                 </li>
+               
             </ul>
 
             <!-- SEARCH FORM -->
@@ -73,29 +82,64 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <li><a href="/Giris/cikis" class="btn btn-danger"> Çıkış Yap</a></li>
+                <!-- Messages Dropdown Menu -->         
+               @Html.Action("_GelenMesajlar", "Mesaj")
+             
+                  
+               @Html.Action("_BildirimPaneli", "Mesaj") 
+                
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fa fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                       @if (Session["Yetki"].ToString() == "Yetkili")
+                       {
+                        <div class="dropdown-divider"></div>
+                        <a href="/Admin/SiteAyar" class="dropdown-item">
+                            <i class="fa fa-cogs"></i>  Site Ayarları
+                            <span class="float-right text-muted text-sm">|</span>
+                        </a>
+                       }
+                       
+                        <div class="dropdown-divider"></div>
+                        <a href="/Admin/Profil" class="dropdown-item">
+                            <i class="fa fa-users"></i>  Profil Ayarları
+                            <span class="float-right text-muted text-sm">|</span>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a href="/Admin/Cikis" class="dropdown-item">
+                            <i class="fa fa-close"></i>  Çıkış Yap
+                            <span class="float-right text-muted text-sm">|</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+
+                    </div>
+                </li>
+
             </ul>
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                     style="opacity: .8">
-                <span class="brand-text font-weight-light">S R C ADMİN</span>
+            <a href="" class="brand-link text-center"> 
+                <span class="brand-text font-weight-light text-center"><i class="fa fa-diamond" aria-hidden="true"></i><b>S R C</b> ADMİN</span><br />
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
+                    
                     <div class="info">
-                        <a href="#" class="d-block">@Session["isim"]</a>
-                    </div>
+                      
+                            <span style="color:white;" class="brand-text font-weight-light"><i class="fa fa-user" aria-hidden="true"></i> @Session["kullanici"].ToString()</span>
+                            <br />
+                            <span style="color:white;" class="brand-text font-weight-light"><i class="fa fa-flag" aria-hidden="true"></i> @Session["Yetki"].ToString()</span>
+</div>
                 </div>
 
                 <!-- Sidebar Menu -->
@@ -107,21 +151,102 @@
 
 
                         <li class="nav-item">
-                            <a href="/Home/Index" class="nav-link active">
+                            <a href="/Admin/Index" class="nav-link active">
                                 <i class="nav-icon fa fa-dashboard"></i>
                                 <p>
                                     BAŞLANGIÇ
                                 </p>
                             </a>
                         </li>
-                        @*<li class="nav-item">
-                                <a href="pages/widgets.html" class="nav-link ">
-                                    <i class="nav-icon fa fa-pie-chart"></i>
-                                    <p>
-                                        ÜRÜN AYARLARI
-                                    </p>
-                                </a>
-                            </li>*@
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-pie-chart"></i>
+                                <p>
+                                    ETKİLEŞİM
+
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Mesaj/Hosgeldiniz/" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Rezervasyonlar</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Mesaj/MesajListe" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Gelen Mesajlar</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Mesaj/AnketListe" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Anketler</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+@if (Session["Yetki"].ToString() == "Yetkili")
+{
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-pie-chart"></i>
+                                <p>
+                                    MAİL 
+
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Mail/GonderilenMail" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Gönderilen Mailler</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/Mail/MailGonder" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Mail Gönder</p>
+                                    </a>
+                                </li>
+
+                               
+
+                                <li class="nav-item">
+                                    <a href="/Mail/TopluMailGonder" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Toplu Mail Gönder</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/Mail/CCListe" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>CC Mail</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/Mail/MailAyar" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Gönderici Mail Ayarları</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/Mail/MailDB" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Mail Veritabanı</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
                         <li class="nav-item has-treeview ">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-pie-chart"></i>
@@ -133,82 +258,26 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/Admin/Kategori" class="nav-link">
+                                    <a href="/Kategori/Index" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Kategori Ayarları</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Admin/Urun" class="nav-link">
+                                    <a href="/Urun/UrunListe" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Urun Ayarları</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="/Admin/UrunEkle" class="nav-link">
+                                @*<li class="nav-item">
+                                    <a href="/Urun/UrunEkle" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Urun Ekle</p>
                                     </a>
-                                </li>
+                                </li>*@
                             </ul>
                         </li>
 
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-pie-chart"></i>
-                                <p>
-                                    REFERANS AYARLARI
-
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/refKategori/Index" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Kategori Ayarları</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/Referans/Index" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Referans Ayarları</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/Referans/referansEkle" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Referans Ekle</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-pie-chart"></i>
-                                <p>
-                                    HABER AYARLARI
-
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/Haber/Index" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Haber Ayarları</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/Haber/haberEkle" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Haber Ekle</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
                         <li class="nav-item has-treeview ">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-pie-chart"></i>
@@ -220,18 +289,18 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/Sube/Index" class="nav-link">
+                                    <a href="/Iletisim/BilgiDuzenle?ID=1" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>İletişim Ayarları</p>
+                                        <p>İletişim Bilgi Ayarları</p>
                                     </a>
                                 </li>
+                              
                                 <li class="nav-item">
-                                    <a href="/Sube/subeEkle" class="nav-link">
+                                    <a href="/Iletisim/Sosyal" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Şube Ekle</p>
+                                        <p>Sosyal Ayarlar</p>
                                     </a>
                                 </li>
-
                             </ul>
                         </li>
 
@@ -246,17 +315,26 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/Sayfa/Index" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Sayfa Ayarları</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/Sayfa/sayfaEkle" class="nav-link">
+                                    <a href="/Sayfa/SayfaEkle" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Sayfa Ekle</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="/Sayfa/SayfaListele" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Sayfa Listele</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Hakkimizda/HakkimizdaDuzenle?HID=1" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Hakkımızda Ayarları</p>
+                                    </a>
+                                </li>
+
+                                @Html.Action("_SayfaListe", "Sayfa")
+
 
                             </ul>
                         </li>
@@ -280,7 +358,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Slayt/resimEkle" class="nav-link">
+                                    <a href="/Slayt/SlaytEkle" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>Slayt Ekle</p>
                                     </a>
@@ -288,11 +366,74 @@
 
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-info"></i>
+                                <p>
+                                    Galeri Ayarları
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Galeri/ResimListele" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Resim Listele</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Galeri/ResimEkle" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>Resim Ekle</p>
+                                    </a>
+                                </li>
 
-
-
-
-
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Hizmetler/Index" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-info"></i>
+                                <p>Hizmetler Ayarları</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Diger/NelerVarListe" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-info"></i>
+                                <p>Sizi Ne Bekliyor Ayarları</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Diger/Markalar" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-info"></i>
+                                <p>Marka Ayarları</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">İŞLEMLER</li>
+                        <li class="nav-item">
+                            <a href="/Diger/LOG" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-warning"></i>
+                                <p>LOG</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Admin/SiteAyar" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-warning"></i>
+                                <p>SİTE AYARLARI</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Admin/Kullanici" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-warning"></i>
+                                <p>KULLANICI AYARLARI</p>
+                            </a>
+                        </li>
+}
+                        <li class="nav-item">
+                            <a href="/Admin/Cikis" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-danger"></i>
+                                <p>ÇIKIŞ YAP</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -311,7 +452,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/Home/Index">Başlangıç</a></li>
+                                <li class="breadcrumb-item"><a href="/Admin/Index">Başlangıç</a></li>
                                 <li class="breadcrumb-item active">@RenderSection("sitemap", false)</li>
                             </ol>
                         </div><!-- /.col -->
@@ -383,6 +524,16 @@
     <script src="/plugins/datatables/dataTables.bootstrap4.js"></script>
 
     <script src="/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="/plugins/select2/js/select2.full.min.js"></script>
+
+
+
+
+
+
+
+
     <script>
             $(function () {
 
@@ -396,7 +547,7 @@
                 });
 
                 $('#dene').DataTable({
-                    "paging": true,
+                    "paging": false,
                     "lengthChange": true,
                     "searching": true,
                     "ordering": true,
@@ -406,6 +557,16 @@
             });
     </script>
     @RenderSection("script", false)
+    <script>
+        $(function () {
+            //Add text editor
+            $('#Mesaj').summernote()
+            $('.select2').select2()
+            $('[data-mask]').inputmask()
+
+        })
+
+    </script>
 </body>
 </html>
 

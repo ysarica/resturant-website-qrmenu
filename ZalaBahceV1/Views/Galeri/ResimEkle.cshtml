@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "ResimEkle";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@section Baslik{ GALERİ AYARLARI }
+@section sitemap{GALERİ AYARLARI }
+@section title{GALERİ AYARLARI }
+@model ZalaBahceV1.Models.Galeri
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-warning card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    RESİM EKLE
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                  
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+            
+
+                @*------------content start------------*@
+
+
+
+                @using (Html.BeginForm("ResimEkle", "Galeri", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    <div class="row">
+                        <div class="col-md-2"><dt>Resim Baslik: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Baslik, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <hr />
+                        <div class="row">
+                            <div class="col-md-2"><dt>Resim Aciklama: </dt></div>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.aciklama, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <hr />
+                     
+                        <div class="row">
+                            <div class="col-md-2"><dt> Resim: </dt></div>
+                            <div class="col-md-10">
+                                <input type="file" name="resim" id="resim" class="form-control" />
+                            </div>
+                        </div>
+                        <hr />
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <input type="submit" value="Ekle" class="btn btn-primary btn-lg col-md-12" />
+                            </div>
+                        </div>
+
+
+
+
+                        @*--------------content end--------------*@
+                        @*</div>*@
+
+
+                }
+            </div>
+        </div>
+    </div>
+
+    @*------------card end----------------*@
+
+

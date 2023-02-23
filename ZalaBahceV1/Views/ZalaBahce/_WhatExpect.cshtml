@@ -1,67 +1,35 @@
-﻿<!-- Process -->
+﻿@model IEnumerable<ZalaBahceV1.Models.NelerVar>
+
+
+<!-- Process -->
 <div class="g-bg-color--primary-ltr">
-    <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+    <div class="container g-padding-y-80--xs ">
         <div class="g-text-center--xs g-margin-b-100--xs">
             <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">ZALA BAHÇE'DE</p>
             <h2 class="g-font-size-32--xs g-font-size-36--sm g-color--white">SİZİ NE BEKLİYOR</h2>
         </div>
-        <ul class="list-inline row g-margin-b-100--xs">
-            <!-- Process -->
+        <ul class="list-inline row g-margin-b-0--xs">
+        @foreach (var i in Model)
+        {
+    <!-- Process -->
             <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
                 <div class="center-block g-text-center--xs">
                     <div class="g-margin-b-30--xs">
-                        <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">01</span>
+                        <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">@i.ID</span>
                     </div>
                     <div class="g-padding-x-20--xs">
-                        <h3 class="g-font-size-18--xs g-color--white">Muhteşem Yemekler</h3>
-                        <p class="g-color--white-opacity">Usta Aşçılar Tarafından Kahvaltı,Öğlen Yemeği ve Akşam Yemeği İçin Mükemmel Yemekler Sizin İçin Hazırlanıyor</p>
+                        <h3 class="g-font-size-18--xs g-color--white">@i.baslik</h3>
+                        <p class="g-color--white-opacity">@i.aciklama</p>
                     </div>
                 </div>
             </li>
             <!-- End Process -->
-            <!-- Process -->
-            <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--md">
-                <div class="center-block g-text-center--xs">
-                    <div class="g-margin-b-30--xs">
-                        <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">02</span>
-                    </div>
-                    <div class="g-padding-x-20--xs">
-                        <h3 class="g-font-size-18--xs g-color--white">Kahve ve Nargile</h3>
-                        <p class="g-color--white-opacity">Baristalarımız Tarafından Sizin İçin Hazırlanan Mükemmel Kahveler ve Bir çok Nargile İle Yemekten Sonra Keyfinize Keyif Katın</p>
-                    </div>
-                </div>
-            </li>
-            <!-- End Process -->
-            <!-- Process -->
-            <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1 g-margin-b-60--xs g-margin-b-0--sm">
-                <div class="center-block g-text-center--xs">
-                    <div class="g-margin-b-30--xs">
-                        <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">03</span>
-                    </div>
-                    <div class="g-padding-x-20--xs">
-                        <h3 class="g-font-size-18--xs g-color--white">Sizin İçin Oyun Alanları</h3>
-                        <p class="g-color--white-opacity">Okey,Tavla,Monopoly Gibi Birçok Oyun Sizler İçin Tahsis Edilmiş Alanımızda</p>
-                    </div>
-                </div>
-            </li>
-            <!-- End Process -->
-            <!-- Process -->
-            <li class="col-sm-3 col-xs-6 g-full-width--xs s-process-v1">
-                <div class="center-block g-text-center--xs">
-                    <div class="g-margin-b-30--xs">
-                        <span class="g-display-inline-block--xs g-width-100--xs g-height-100--xs g-font-size-38--xs g-color--primary g-bg-color--white g-box-shadow__dark-lightest-v4 g-padding-x-20--xs g-padding-y-20--xs g-radius--circle">04</span>
-                    </div>
-                    <div class="g-padding-x-20--xs">
-                        <h3 class="g-font-size-18--xs g-color--white">Cocuklarınız İçin Oyun Alanı</h3>
-                        <p class="g-color--white-opacity">Çocuklarınızın Canı Hiç Sıkılmayacak,Cocuklarınız İçin Bir Parkımız Bulunuyor</p>
-                    </div>
-                </div>
-            </li>
-            <!-- End Process -->
+
+        }
         </ul>
         <div class="g-text-center--xs">
             <div class="wow fadeInUp" data-wow-duration=".3" data-wow-delay=".1s">
-                <a href="/Home/Iletisim" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50">İletişim ve Rezervasyon</a>
+                <a href="/Zalabahce/İletisim" class="text-uppercase s-btn s-btn--md s-btn--white-bg g-radius--50">İletişim ve Rezervasyon</a>
             </div>
         </div>
     </div>

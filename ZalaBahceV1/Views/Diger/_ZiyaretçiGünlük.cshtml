@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Sayac>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <div class="card card-dark">
+        <div class="card-header">
+            <h3 class="card-title">Günlük Ziyaretçi</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="chart">
+                <canvas id="myChart" height="75"></canvas>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+<script>
+
+
+
+
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                @foreach (var i in Model)
+                {
+                    string day = i.gün + "." + i.ay + "." + i.yil;
+                    @: '@day',
+                }
+
+            ],
+            datasets: [
+              {
+                    label: 'Günlük Ziyaret',
+                  data: [
+                      @foreach (var a in Model)
+                      {
+                         @: @a.sayi ,
+
+                          
+                      }
+
+                  ],
+                  backgroundColor: [
+                      @foreach (var item in Model)
+                      {
+                         @: 'rgba(53, 169, 222, 1)',
+                      }
+                  ],
+                  borderColor: [
+                      @foreach (var item in Model)
+                       {
+                        @:   'rgba(20, 181, 255, 1)',
+                       }
+                  ],
+                  borderWidth: 1
+              },
+
+            ]
+
+        },
+
+
+        options: {
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

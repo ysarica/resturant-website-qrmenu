@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "SayfaDuzenle";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model ZalaBahceV1.Models.Sayfalar
+@section Baslik{ SAYFA DUZENLE }
+@section sitemap{SAYFA DUZENLE }
+@section title{SAYFA DUZENLE}
+
+@using (Html.BeginForm("SayfaDuzenle", "Sayfa", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-warning card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        SAYFA DÜZENLE
+                    </h3>
+                    <!-- tools box -->
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool btn-sm"
+                                data-widget="collapse"
+                                data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                      
+                    </div>
+                    <!-- /. tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    @*<div class="mb-3">*@
+
+                    @*------------content start------------*@
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.SaID)
+
+                    <div class="row">
+                        <div class="col-md-2"><dt>Sayfa Yerleştirme: </dt></div>
+                        <div class="col-md-10">
+                            <select id="yer" name="yer" class="form-control">
+                                <option value="0">Seçiniz</option>
+                                <option value="ekleme">Menüye Ekleme</option>
+                                <option value="altmenu">Alt Menuye Ekle</option>
+                                <option value="ustmenu">Üst Menüye Ekle</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-md-2"><dt>Sayfa Başlık: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.baslik, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="row">
+                        <div class="col-md-2"><dt>Sayfa Slogan: </dt></div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.baslik2, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Kapak Foroğrafı Seçiniz : </dt></div>
+                        <div class="col-md-10">
+                            <input type="file" name="resim" id="resim" class="form-control" />
+                            <img src="@Model.resim" alt="Alternate Text" height="200" />
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-2"><dt>Ürün Açıklaması: </dt></div>
+                        <div class="col-md-10">
+                            <textarea id="icerik" name="icerik" style="width: 100%" placeholder="Sayfa İçeriği Buraya Giriniz">@Model.icerik</textarea>
+
+
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Güncelleştir" class="btn btn-warning btn-lg" />
+                        </div>
+                    </div>
+                    @*--------------content end--------------*@
+                    @*</div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*------------card end----------------*@
+
+}
+
+<div>
+    @Html.ActionLink("LİSTEYE GERİ DÖN", "SayfaListele")
+</div>
+@section script{
+    <script>
+            $(function () {
+
+                ClassicEditor
+                .create(document.querySelector('#icerik'))
+                .then(function (editor) {
+                    // The editor instance
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+            })
+    </script>
+
+
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

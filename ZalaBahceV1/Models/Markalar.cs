@@ -15,7 +15,7 @@ namespace ZalaBahceV1.Models
         [StringLength(50)]
         public string markaAd { get; set; }
 
-        [StringLength(50)]
+        [StringLength(250)]
         public string markaResim { get; set; }
     }
 }

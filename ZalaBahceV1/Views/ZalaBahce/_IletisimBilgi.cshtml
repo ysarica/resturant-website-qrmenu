@@ -1,0 +1,50 @@
+﻿
+@model IEnumerable<ZalaBahceV1.Models.iletisim>
+
+@foreach (var i in Model)
+{
+
+<div class="g-overflow--hidden g-padding-x-40--xs g-padding-y-50--xs">
+    <h2 class="g-font-size-24--xs g-color--white g-margin-b-50--xs">@i.baslik</h2>
+    <ul class="list-unstyled g-margin-b-70--xs">
+        <li class="clearfix g-color--white g-margin-b-40--xs">
+            <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                <i class="g-font-size-20--xs g-color--white-opacity-light ti-location-pin"></i>
+            </div>
+            <div class="g-media__body">@i.adres
+            </div>
+        </li>
+        <li class="clearfix g-color--white g-margin-b-40--xs">
+            <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                <i class="g-font-size-20--xs g-color--white-opacity-light ti-headphone-alt"></i>
+            </div>
+            <div class="g-media__body">
+               @i.telefon
+            </div>
+        </li>
+        <li class="clearfix g-color--white g-margin-b-40--xs">
+            <div class="g-media g-width-40--xs g-margin-t-5--xs">
+                <i class="g-font-size-20--xs g-color--white-opacity-light ti-email"></i>
+            </div>
+            <div class="g-media__body">
+@i.mail            </div>
+        </li>
+    </ul>
+    <ul class="list-inline g-ul-li-lr-15--xs">
+        @Html.Action("_Sosyal","Zalabahce")
+        
+    </ul>
+    <i class="g-font-size-150--xs g-color--white-opacity-lightest ti-comments" style="position: absolute; "></i>
+</div>
+
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />

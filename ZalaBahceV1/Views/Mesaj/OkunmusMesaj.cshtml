@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "OkunmusMesaj";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@section Baslik{OKUNMAMİS MESAJ LİSTE }
+@section sitemap{OKUNMAMİS MESAJ LİSTE }
+@section title{OKUNMAMİS MESAJ LİSTE}
+@model IEnumerable<ZalaBahceV1.Models.Rezervasyon>
+@using ZalaBahceV1.Models;
+@{ZalaDB db = new ZalaDB();
+    List<GelenMesaj> list = db.GelenMesaj.Where(x => x.okundu == "Okundu").ToList();
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    MESAJ LİSTE
+                    <small> Siteden Gelen Mesajlar Burada Listelenir  </small>
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <div class="btn-group">
+                        <a href="/Mesaj/MesajListe" class="btn btn-primary">Okunmamış</a>
+                        <a href="/Mesaj/Okunmus/" class="btn btn-warning">Okunmuş</a>
+                    </div>
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="mb-3">
+
+                    @*------------content start------------*@
+
+
+                    <table id="urunkatliste" class="table table-bordered table-striped table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Ad&Soyad</th>
+                                <th>Tarih</th>
+                                <th>Telefon</th>
+                                <th>Mail</th>
+                                <th>Konu</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in list.OrderBy(x => x.MID))
+                            {
+
+                                <tr>
+                                    <td>@i.adsoyad</td>
+                                    <td>@i.tarih</td>
+                                    <td>@i.tel</td>
+                                    <td>@i.mail</td>
+                                    <td>@i.konu</td>
+                                    <td align="center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#MesajOku-@i.MID">Oku</button>
+                                            <a href="/Mesaj/MesajSil?MID=@i.MID" class="btn btn-danger">Sil</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <div class="modal fade bd-example-modal-lg" id="MesajOku-@i.MID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Mesaj Oku</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <input type="text" style="display:none;" class="form-control" id="MID" name="MID" value="@i.MID">
+                                            <div class="modal-body">
+
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="info-box bg-light">
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text text-center text-muted">Ad Soyad</span>
+                                                                <span class="info-box-number text-center text-muted mb-0">@i.adsoyad</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="info-box bg-light">
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text text-center text-muted">Tarih</span>
+                                                                <span class="info-box-number text-center text-muted mb-0">@i.tarih</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="info-box bg-light">
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text text-center text-muted">Telefon</span>
+                                                                <span class="info-box-number text-center text-muted mb-0">@i.tel</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="info-box bg-light">
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text text-center text-muted">Mail</span>
+                                                                <span class="info-box-number text-center text-muted mb-0">@i.mail</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="info-box bg-light">
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text text-center text-muted">Durum</span>
+                                                                <span class="info-box-number text-center text-muted mb-0">@i.okundu</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="info-box bg-light">
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text text-center text-muted">Konu</span>
+                                                                <span class="info-box-number text-center text-muted mb-0">@i.konu</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-12">
+                                                        <div class="info-box bg-light">
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text text-center text-muted">Oluşturma Tarihi</span>
+                                                                <span class="info-box-number text-center text-muted mb-0">@i.mesaj</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Mesaj Notu:</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                                </div>
+                                                                <textarea type="text" class="form-control" placeholder="Mesaj Notu" id="aciklama" name="aciklama">@i.aciklama</textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                                                <a href="/Mesaj/MesajSil?MID=@i.MID" class="btn btn-danger">Sil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Ad&Soyad</th>
+                                <th>Tarih</th>
+                                <th>Telefon</th>
+                                <th>Mail</th>
+                                <th>Konu</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @*--------------content end--------------*@
+                </div>
+                <p class="text-sm mb-0">
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

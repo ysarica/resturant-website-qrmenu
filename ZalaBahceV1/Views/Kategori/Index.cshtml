@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@using PagedList
+@using PagedList.Mvc
+@section Baslik{ KATEGORİ AYARLARI }
+@section sitemap{KATEGORİ AYARLARI }
+@section title{KATEGORİ AYARLARI }
+@model PagedList.IPagedList<ZalaBahceV1.Models.UrunKategori>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    URUN KATEGORİ LİSTESİ
+                    <small>Düzenleme ve Silme İşlemleri Buradan Yapılır</small>
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#KatEkle">Kategori Ekle</button>
+             
+                    @*<button type="button" class="btn btn-tool btn-sm"
+                                data-widget="remove"
+                                data-toggle="tooltip"
+                                title="Remove">
+                            <i class="fa fa-times"></i>
+                        </button>*@
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+            
+
+                    @*------------content start------------*@
+
+
+                    <table id="dene" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Kategori</th>
+                                <th width="5%">Resim</th>
+                                <th width="41%">Aciklama</th>
+
+                                <th width="33%">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model)
+                            {
+
+
+                                <tr>
+                                    <td>@i.kategoriID</td>
+                                    <td>@i.baslik </td>
+                                    <td><img src="@i.resim" height="45" width="45" /> </td>
+                                    <td>@i.aciklama</td>
+
+                                    <td align="center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#KatGuncelle-@i.kategoriID"><i class="fa fa-pencil-square"></i> Düzenle</button>
+                                            <a id="btnAlert" href="/Kategori/KategoriSil?kategoriID=@i.kategoriID" class="btn btn-danger"><i class="fa fa-trash"></i> Sil</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <div class="modal fade bd-example-modal-lg" id="KatGuncelle-@i.kategoriID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Ürün Kategori Düzenle</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            @using (Html.BeginForm("_KategoriDuzenle", "Kategori", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+                                            {<input type="text" style="display:none;" class="form-control" id="kategoriID" name="kategoriID" value="@i.kategoriID">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="customFile">Kategori Resim:</label>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" name="attachment" id="attachment">
+                                                            <label class="custom-file-label" for="customFile">Eklemek İstediğiniz Resmi Seçiniz</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Ürün Kategori Adı:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="Ürün Kategori Adı" id="baslik" name="baslik" value="@i.baslik">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Ürün Kategori Açıklama:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="Ürün Kategori Açıklama" id="aciklama" name="aciklama" value="@i.aciklama">
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                                                    <button type="submit" class="btn btn-warning">Güncelle</button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Kategori</th>
+                                <th width="5%">Resim</th>
+                                <th width="41%">Aciklama</th>
+
+                                <th width="33%">İşlem</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                 
+                    @Html.PagedListPager((IPagedList)Model, p => Url.Action("Index", new { p }))
+            </div>
+        </div>
+
+        @*------------card end----------------*@
+    </div>
+</div>
+
+
+@*------------card end----------------*@
+
+<div class="modal fade bd-example-modal-lg" id="KatEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ürün Kategori Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+@using (Html.BeginForm("_KategoriEkle", "Kategori", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+{
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="customFile">Ürün Resim:</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="attachment" id="attachment">
+                        <label class="custom-file-label" for="customFile">Eklemek İstediğiniz Resmi Seçiniz</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Ürün Kategori Adı:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-check"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Ürün Kategori Adı" id="baslik" name="baslik">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Ürün Kategori Açıklama:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-check"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Ürün Kategori Açıklama" id="aciklama" name="aciklama">
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                <button type="submit" class="btn btn-warning">Güncelle</button>
+            </div>
+}
+        </div>
+    </div>
+</div>
+
+
+

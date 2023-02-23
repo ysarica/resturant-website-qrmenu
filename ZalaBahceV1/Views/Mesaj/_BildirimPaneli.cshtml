@@ -1,0 +1,26 @@
+﻿<li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="fa fa-bell-o"></i>
+        <span class="badge badge-warning navbar-badge">@ViewBag.totalsayi</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-item dropdown-header">Toplam @ViewBag.totalsayi Bildirim</span>
+        <div class="dropdown-divider"></div>
+        <a href="/Mesaj/MesajListe/" class="dropdown-item">
+            <i class="fa fa-envelope mr-2"></i> @ViewBag.msjsayi Okunmamış Mesaj
+            <span class="float-right text-muted text-sm">|</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="/Mesaj/Hosgeldiniz/" class="dropdown-item">
+            <i class="fa fa-users mr-2"></i>@ViewBag.rezsayi1 Onaylanmamış Rezervasyon
+            <span class="float-right text-muted text-sm">|</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="/Mesaj/AnketListe/" class="dropdown-item">
+            <i class="fa fa-file mr-2"></i> @ViewBag.anketsayi Okunmamış Değerlendirme
+            <span class="float-right text-muted text-sm">|</span>
+        </a>
+        <div class="dropdown-divider"></div>
+       
+    </div>
+</li>

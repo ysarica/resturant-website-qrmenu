@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "AnketIslem";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@section Baslik{ ANKETLER }
+@section sitemap{ANKETLER }
+@section title{ANKETLER }
+@model IEnumerable<ZalaBahceV1.Models.DegerlendirmeFormu>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-info card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    ANKET
+                    <small>Düzenleme ve Silme İşlemleri Buradan Yapılır</small>
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="mb-3">
+
+                    @*------------content start------------*@
+
+
+                    <table id="urunkatliste" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Ad Soyad</th>
+                                <th width="10%">Tel</th>
+                                <th width="10%">Mail</th>
+                                <th width="10%">Adres</th>
+                                <th width="10%">Tarih</th>
+                                <th width="10%">Durum</th>
+                                <th width="20%">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model)
+                            {
+
+
+                                <tr>
+                                    <td>@i.ID</td>
+                                    <td>@i.adsoyad</td>
+                                    <td>@i.tel</td>
+                                    <td>@i.mail</td>
+                                    <td>@i.adres</td>
+                                    <td>@i.tarih</td>
+                                    <td>
+                                        @if (@i.okundu == "0")
+                                        {
+                                            <p class="label label-danger">Okunmadı</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="label label-success text-center">Okundu</p>
+                                        }
+                                    </td>
+                                    <td align="center">
+                                        <div class="btn-group">
+                                            <a href="/Mesaj/AnketDetay?ID=@i.ID" class="btn btn-primary">Oku</a>
+                                            <a href="/Mesaj/AnketSil?ID=@i.ID" class="btn btn-danger">Anket Sil</a>
+                                        </div>
+                                    </td>
+
+                                </tr>  }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Ad Soyad</th>
+                                <th width="10%">Tel</th>
+                                <th width="10%">Mail</th>
+                                <th width="10%">Konu</th>
+                                <th width="10%">Nereden</th>
+                                <th width="10%">Tarih</th>
+                                <th width="10%">Durum</th>
+                                <th width="20%">İşlem</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @*--------------content end--------------*@
+                </div>
+                <p class="text-sm mb-0">
+
+                </p>
+            </div>
+        </div>
+
+        @*------------card end----------------*@
+    </div>
+</div>
+
+
+

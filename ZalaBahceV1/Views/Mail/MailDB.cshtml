@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "MailDB";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model IEnumerable<ZalaBahceV1.Models.MüsteriMailDB>
+@section Baslik{ MAİL VERİTABANI }
+@section sitemap{MAİL VERİTABANI }
+@section title{MAİL VERİTABANI}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Action("_Menu", "Mail")
+
+            </div>
+            <!-- /.col -->
+
+            <div class="col-md-9">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                             Mail Listesi
+                            <small>Düzenleme ve Silme İşlemleri Buradan Yapılır</small>
+                        </h3>
+                        <!-- tools box -->
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MailEkle"><i class="fa fa-plus"></i> Mail Ekle</button>
+
+                        </div>
+                        <!-- /. tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="mb-3">
+
+                            @*------------content start------------*@
+
+
+                            <table id="urunkatliste" class="table table-bordered table-striped table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">Ad Soyad</th>
+                                        <th width="15%">Telefon</th>
+                                        <th width="5%">Mail</th>
+                                        <th width="41%">Adres</th>
+                                        <th width="33%">İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var i in Model)
+                                    {
+                                        <tr>
+                                            <td>@i.AdSoyad</td>
+                                            <td>@i.tel </td>
+                                            <td>@i.mail </td>
+                                            <td>@i.adres</td>
+
+                                            <td align="center">
+                                                <div class="btn-group">
+                                                    <a href="/Mail/MailDBSil?ID=@i.mailID" class="btn btn-danger"><i class="fa fa-trash"></i> Sil</a>
+                                                </div>
+                                            </td>
+
+                                        </tr>  }
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th width="5%">Ad Soyad</th>
+                                        <th width="15%">Telefon</th>
+                                        <th width="5%">Mail</th>
+                                        <th width="41%">Adres</th>
+
+                                        <th width="33%">İşlem</th>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            @*--------------content end--------------*@
+                        </div>
+                        <p class="text-sm mb-0">
+
+                        </p>
+                    </div>
+                </div>
+
+                @*------------card end----------------*@
+            </div>
+        </div>
+        <!-- /. box -->
+    </div>
+    <!-- /.col -->
+</section>
+
+<div class="modal fade bd-example-modal-lg" id="MailEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Mail Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+@using (Html.BeginForm("_MailDBEkle", "Mail", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+{
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Mail Adresi:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-check"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Mail" id="mail" name="mail">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Ad Soyad:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-check"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Ad Soyad" id="Adsoyad" name="Adsoyad">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Telefon:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-check"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Telefon" id="tel" name="tel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Adres:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-check"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Adres" id="adres" name="adres">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                <button type="submit" class="btn btn-primary">Ekle</button>
+            </div>
+}
+        </div>
+    </div>
+</div>

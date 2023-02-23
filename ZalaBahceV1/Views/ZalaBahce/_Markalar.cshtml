@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Markalar>
+
+
+    <!-- Clients -->
+    <div class="g-container--md g-padding-y-80--xs g-padding-y-100--sm">
+        <!-- Swiper Clients -->
+        <div class="s-swiper js__swiper-clients">
+            <div class="swiper-wrapper">
+             @foreach (var i in Model)
+            {
+                <div class="swiper-slide">
+                    <div class="wow fadeIn" data-wow-duration=".3" data-wow-delay=".@i.MID+s">
+                        <img class="s-clients-v1" src="@i.markaResim" alt="@i.markaAd">
+                    </div>
+                </div>
+             }   
+            </div>
+        </div>
+    </div>    <!-- End Swiper Clients -->
+
+    <!-- End Clients -->
+
+

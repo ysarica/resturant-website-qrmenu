@@ -1,0 +1,6 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Sayfalar>
+@foreach (var a in Model)
+{
+    <li class="s-header-v2__nav-item"><a href="/ZalaBahce/Sayfa?SaID=@a.SaID" class="s-header-v2__nav-link">@a.baslik</a></li>
+
+}

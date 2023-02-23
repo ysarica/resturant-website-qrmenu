@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = "Hosgeldiniz";
+    Layout = "~/Views/Shared/RezervasyonTMP.cshtml";
+}
+@model IEnumerable<ZalaBahceV1.Models.Rezervasyon>
+@using ZalaBahceV1.Models;
+@{ZalaDB db = new ZalaDB();
+    double t = Convert.ToDouble(DateTime.Now.ToString("yyyy/MM/dd"));
+    List<Rezervasyon> list = db.Rezervasyon.Where(x => x.okundu == "Onaylandı").ToList();
+ }
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">
+            REZERVASYON LİSTE
+            <small>Yaklaşan Rezervasyonlar Burada Listelenir  </small>
+        </h3>
+        <!-- tools box -->
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool btn-sm"
+                    data-widget="collapse"
+                    data-toggle="tooltip"
+                    title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+        <!-- /. tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="mb-3">
+
+            @*------------content start------------*@
+
+
+            <table id="urunkatliste" class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Ad&Soyad</th>
+                        <th>Tarih/Saat</th>
+                        <th>Hizmet</th>
+                        <th>Telefon</th>
+                        <th>Oluşturma Tarihi</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in list.OrderBy(x => x.pTarih))
+                    {
+                        if (Convert.ToDouble(i.pTarih)>=t)
+                        {
+                            <tr>
+                                @{
+                                    string gün, ay, yil, tarihf;
+                                    gün = i.pTarih.Substring(8, 2);
+                                    ay = i.pTarih.Substring(5, 2);
+                                    yil = i.pTarih.Substring(0, 4);
+                                    tarihf = gün + "." + ay + "." + yil;
+                                }
+                                <td>@i.adsoyad</td>
+                                <td>@tarihf - @i.pSaat </td>
+                                <td>@i.hizmet</td>
+                                <td>@i.telefon</td>
+                                <td>@i.tarih</td>
+                                <td align="center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#RezDuzenle-@i.RezID">Detay&Düzen</button>
+                                        <a id="btnAlert" href="/Rez/_rezIptal?RezID=@i.RezID&URL=/Rez/Hosgeldiniz/" class="btn btn-danger">İptal</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <div class="modal fade bd-example-modal-lg" id="RezDuzenle-@i.RezID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Rezervasyon Düzen&Detay</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+@using (Html.BeginForm("_rezGuncelle", "Rez", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+{<input type="text" style="display:none;" class="form-control" id="RezID" name="RezID" value="@i.RezID">
+                                        <div class="modal-body">
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label>Adı Soyadı:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="Adı Soyadı" id="adsoyad" name="adsoyad" value="@i.adsoyad" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Hizmet:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="Alınacak Hizmet" id="hizmet" name="hizmet" value="@i.hizmet" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Tarih:(@tarihf)</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <input type="date" class="form-control" id="pTarih" name="pTarih" placeholder="@i.pTarih" value="@i.pTarih">
+                                             
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label>Telefon:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="Telefon Numarası" id="telefon" name="telefon" value="@i.telefon">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Kişi Sayısı:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <input type="number" class="form-control" placeholder="Alınacak Hizmet" id="kisi" name="kisi" value="@i.kisi">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Saat:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <input type="time" class="form-control" placeholder="Alınacak Hizmet" id="pSaat" name="pSaat" value="@i.pSaat">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>Not:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                            </div>
+                                                            <textarea type="text" class="form-control" placeholder="Rezervasyon Notu" id="aciklama" name="aciklama">@i.aciklama</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="info-box bg-light">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text text-center text-muted">Oluşturma Tarihi</span>
+                                                            <span class="info-box-number text-center text-muted mb-0">@i.tarih</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="info-box bg-light">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text text-center text-muted">Durum</span>
+                                                            <span class="info-box-number text-center text-muted mb-0">@i.okundu</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                                            <a id="btnAlert" href="/Rez/_rezIptal?RezID=@i.RezID&URL=/Rez/Hosgeldiniz/" class="btn btn-danger">İptal</a>
+                                            <button type="submit" class="btn btn-warning">Güncelle</button>
+                                        </div>
+}
+                                    </div>
+                                </div>
+                            </div>
+                                        }
+
+                                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Ad&Soyad</th>
+                        <th>Tarih/Saat</th>
+                        <th>Hizmet</th>
+                        <th>Telefon</th>
+                        <th>Oluşturma Tarihi</th>
+                        <th>İşlem</th>
+                    </tr>
+                </tfoot>
+            </table>
+            @*--------------content end--------------*@
+        </div>
+        <p class="text-sm mb-0">
+
+        </p>
+    </div>
+</div>
+

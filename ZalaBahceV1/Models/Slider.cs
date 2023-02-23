@@ -15,13 +15,15 @@ namespace ZalaBahceV1.Models
         [StringLength(150)]
         public string resim { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string baslik { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string slogan { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string link { get; set; }
+
+        public int? siralama { get; set; }
     }
 }

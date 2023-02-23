@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@section Baslik{ SLAYT AYARLARI }
+@section sitemap{SLAYT AYARLARI }
+@section title{SLAYT AYARLARI }
+
+@model List<ZalaBahceV1.Models.Slider>
+
+
+<div class="row">
+@foreach (var a in Model)
+{
+<div class="col-md-4">
+    <!-- Widget: user widget style 1 -->
+    <div class="card card-widget widget-user">
+        <!-- Add the bg color to the header using any of the bg-* classes -->
+        <div class="widget-user-header text-white" style="background: url('@a.resim') center center;">
+            <h3 class="widget-user-username">@a.baslik</h3>
+            <h5 class="widget-user-desc">@a.slogan</h5>
+        </div>
+        
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-sm-12 border-right">
+                    <div class="description-block">
+                        <a href="@a.link" class="btn btn-default">@a.link</a>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6 border-right">
+                    <div class="description-block">
+                        <a href="/Slayt/SlaytSil?SID=@a.SID" class="btn btn-danger"><i class="fa fa-trash"></i> Resim Sil</a>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <div class="description-block">
+                        <a href="/Slayt/SlaytDuzenle?SID=@a.SID" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Resim Düzenle</a>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </div>
+    <!-- /.widget-user -->
+</div>
+}
+</div>

@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "SiteAyar";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model ZalaBahceV1.Models.SiteAyar
+@section Baslik{ SİTE AYARLARI }
+@section sitemap{SİTE AYARLARI }
+@section title{SİTE AYARLARI }
+
+@if (Model.siteoff == "0")
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-success-gradient collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Site Aktif</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <a href="/Admin/SiteOff" class="btn btn-danger btn-block">Site Pasif Hale Getir</a>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-danger-gradient collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Site Pasif</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <a href="/Admin/SiteOff" class="btn btn-success btn-block">Site Aktif Hale Getir</a>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-warning card-outline">
+            <div class="card-header">
+                <h3 class="card-title">Site Ayarları</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+@using (Html.BeginForm("SiteAyar", "Admin", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ayarID)
+
+
+        <div class="row">
+            <div class="col-6">
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header text-white" style="background: url('@Model.logo1') center center; background-repeat: no-repeat;">
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">Logo 1</div>
+
+                            <div class="col-12"><input type="file" name="logo1" id="logo1" class="form-control" /></div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header text-white" style="background: url('@Model.logo2') center center; background-repeat: no-repeat;">
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">Logo 2</div>
+
+                            <div class="col-12"><input type="file" name="resim" id="resim" class="form-control" /></div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-6">
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">Site Başlığı: (Title)<br />"Site Başlığı En Fazla 70 Karakter Olmalı ve Türkçe Karakter Kullanılmamalı"</div>
+                            @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control", placeholder = "Site Başlığı En Fazla 70 Karakter Olmalı" } })
+
+
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                Site Açıklaması: (Description)<br />"Site Açıklaması En Fazla 150 Karakter Olmalı ve Türkçe Karakter Kullanılmamalı"
+                            </div>
+
+                            @Html.EditorFor(model => model.aciklama, new { htmlAttributes = new { @class = "form-control", placeholder = "Site Açıklaması En Fazla 150 Karakter Olmalı" } })
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="card-footer">
+                        <div class="row">
+
+                            <div class="col-12">
+                                Site Anahtar Kelimeleri: (Keywords)<br />"Anahtar Kelimeler Aralarına Vürgül Koyarak Yazılmalıdırlar ve Türkçe Karakterler Kullanılmamalı Ör:(Tarabyada Resturant,Cafe,Uygun Fiyatlar)"   
+                            </div>
+
+                            @Html.EditorFor(model => model.anahtarKelime, new { htmlAttributes = new { @class = "form-control", placeholder = "Anahtar Kelimeler Aralarına Vürgül Koyarak Yazılmalıdırlar ve Türkçe Karakterler Kullanılmamalı Ör:(Tarabyada Resturant,Cafe,Uygun Fiyatlar)" } })
+
+
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-6">
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">Site URL'si :</div>
+                            @Html.EditorFor(model => model.siteurl, new { htmlAttributes = new { @class = "form-control" } })
+
+
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                Firma Adı :
+                            </div>
+
+                            @Html.EditorFor(model => model.firmaadi, new { htmlAttributes = new { @class = "form-control", placeholder = "Site Açıklaması En Fazla 150 Karakter Olmalı" } })
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-widget widget-user">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="card-footer">
+                        <div class="row">
+                            <input type="submit" value="Güncelle" class="btn btn-primary btn-lg col-md-12" />
+
+
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+}
+    </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>

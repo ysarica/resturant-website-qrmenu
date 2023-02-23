@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@section Baslik{ HİZMET AYARLARI }
+@section sitemap{HİZMET AYARLARI }
+@section title{HİZMET AYARLARI }
+@model IEnumerable<ZalaBahceV1.Models.Hizmetler>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-info card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    HİZMET LİSTESİ
+                    <small>Düzenleme ve Silme İşlemleri Buradan Yapılır</small>
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                   
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="mb-3">
+
+                    @*------------content start------------*@
+
+
+                    <table id="urunkatliste" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">AD</th>      
+                                <th width="41%">Aciklama</th>
+
+                                <th width="33%">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model)
+                            {
+
+
+                                <tr>
+                                    <td>@i.HID</td>
+                                    <td>@i.ad </td>
+                                    <td>@i.icerik</td>
+
+                                    <td align="center">
+                                        <div class="btn-group">
+                                            <a href="/Hizmetler/HizmetDuzenle?HID=@i.HID" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Düzenle</a>
+                                            <a id="btnAlert" href="/Hizmetler/HizmetSil?HID=@i.HID" class="btn btn-danger"><i class="fa fa-trash"></i> Sil</a>
+                                        </div>
+                                    </td>
+
+
+
+
+                                </tr>  }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">AD</th>
+                                <th width="41%">Aciklama</th>
+                                <th width="33%">İşlem</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @*--------------content end--------------*@
+                </div>
+                <p class="text-sm mb-0">
+
+                </p>
+            </div>
+        </div>
+
+        @*------------card end----------------*@
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    HİZMET EKLE
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                @Html.Action("_hizmetEkle", "Hizmetler")
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------card end----------------*@

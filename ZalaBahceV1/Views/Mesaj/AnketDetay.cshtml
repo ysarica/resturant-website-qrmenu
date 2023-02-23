@@ -1,0 +1,604 @@
+﻿
+@{
+    ViewBag.Title = "AnketDetay";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@section Baslik{ ANKET DETAY }
+@section sitemap{ANKET DETAY }
+@section title{ANKET DETAY}
+@model  ZalaBahceV1.Models.DegerlendirmeFormu
+
+
+
+<div class="col-md-12">
+    <!-- Widget: user widget style 1 -->
+    <div class="card card-widget widget-user">
+        <!-- Add the bg color to the header using any of the bg-* classes -->
+        <div class="widget-user-header text-white" style="background: url('/dist/img/photo1.png') center center;">
+            <h3 class="widget-user-username">Adı Soyadı: @Model.adsoyad</h3>
+            <h5 class="widget-user-desc">Mesaj Konusu: @Model.tarih</h5>
+        </div>
+        <div class="widget-user-image">
+            <img class="img-circle" src="/Resim/Genel/logoaga%c3%a7.fw.png" alt="User Avatar">
+        </div>
+        <div class="card-footer">
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fa fa-info"></i> Bilgilendirme!</h5>
+                Görüntülediğiniz Anket - @Model.tarih - Gönderilmiştir
+            </div>
+            @if (Model.okundu == "0")
+            {
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fa fa-warning"></i> Uyarı!</h5>
+                    Görüntülediğiniz Anket Okunmamıştır. Anketi Onaylayınız!
+                </div>
+            }
+            else if (Model.okundu == "1")
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fa fa-check"></i> Bilgilendirme!</h5>
+                    Görüntülediğiniz Anket Okunmuştur Bilgiler Alt Bölümlerde Yer Almaktadır
+                </div>
+            }
+
+            <div class="col-md-12">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">İletişim Bilgileri</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" style="display: block;">
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Mail Adresi</h3>
+
+                                        <a href="/Mail/MailGonder?MID=@Model.mail"> <p>@Model.mail</p></a>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Telefon</h3>
+
+                                        <p>@Model.tel</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Adres</h3>
+
+                                        <p>@Model.adres</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-location-arrow"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <!-- small card -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>@Model.nerdenduydun</h3>
+
+                                        <p>Müşteri ZALA BAHÇEYİ NEREDEN DUYDU ?</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                        </div>
+
+
+
+
+
+                    </div>
+                    <!-- /.card-body -->
+
+                </div>
+                <!-- /.card -->
+            </div>
+
+
+            <div class="col-md-12">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Puanlar ve Sorular</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" style="display: block;">
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Convert.ToInt32(Model.karşılama) > 3)
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Convert.ToInt32(Model.karşılama) == 3)
+                                    {
+                                      @:bg-warning
+                                    }
+                                    else if (Convert.ToInt32(Model.karşılama)<3)
+                                   {
+                                      @:bg-danger
+                                   }
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.karşılama</h3>
+
+                                        <p>Sizi Nasıl Karşıladık ?</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Convert.ToInt32(Model.personel) > 3)
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Convert.ToInt32(Model.personel) == 3)
+                                    {
+                                      @:bg-warning
+                                    }
+                                    else if (Convert.ToInt32(Model.personel)<3)
+                                   {
+                                      @:bg-danger
+                                   }
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.personel</h3>
+
+                                        <p>Personelimizden Memnun Kaldınızmı ?</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                        
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Convert.ToInt32(Model.temizlik) > 3)
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Convert.ToInt32(Model.temizlik) == 3)
+                                    {
+                                      @:bg-warning
+                                    }
+                                    else if (Convert.ToInt32(Model.temizlik)<3)
+                                   {
+                                      @:bg-danger
+                                   }
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.temizlik</h3>
+
+                                        <p>Hijyen ve Temizlik Konusunda Nasıldık ?</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Convert.ToInt32(Model.ücret) > 3)
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Convert.ToInt32(Model.ücret) == 3)
+                                    {
+                                      @:bg-warning
+                                    }
+                                    else if (Convert.ToInt32(Model.ücret)<3)
+                                   {
+                                      @:bg-danger
+                                   }
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.ücret </h3>
+
+                                        <p>Aldıgınız Hizmet Ödediğiniz Ücreti Hak Ediyormu ?</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Convert.ToInt32(Model.mekan) > 3)
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Convert.ToInt32(Model.mekan) == 3)
+                                    {
+                                      @:bg-warning
+                                    }
+                                    else if (Convert.ToInt32(Model.mekan)<3)
+                                   {
+                                      @:bg-danger
+                                   }
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.mekan </h3>
+
+                                        <p>Zala Bahçenin Tasarımını Beğendinizmi ?</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Convert.ToInt32(Model.resturantgenel) > 3)
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Convert.ToInt32(Model.resturantgenel) == 3)
+                                    {
+                                      @:bg-warning
+                                    }
+                                    else if (Convert.ToInt32(Model.resturantgenel)<3)
+                                   {
+                                      @:bg-danger
+                                   }
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.resturantgenel </h3>
+
+                                        <p>Genel Olarak Zala Bahçeyi Nasıl Buldunuz ? </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Model.tekrargelmek == "Evet")
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Model.tekrargelmek == "Hayır")
+                                    {
+                                      @:bg-danger
+                                    }
+                                  
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.tekrargelmek </h3>
+
+                                        <p>Tekrar Zala Bahçe'ye Gelmeyi Düşünürmüsünüz </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Model.tavsiye == "Evet")
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Model.tavsiye == "Hayır")
+                                    {
+                                      @:bg-danger
+                                    }
+
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.tavsiye </h3>
+
+                                        <p>Zala Bahçeyi Bir Başkasına Tavsiye Edermisiniz ? </p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-4">
+                                <!-- small card -->
+                                <div class="small-box @{
+                                    if (Convert.ToInt32(Model.ulasim) > 3)
+                                    {
+                                       @: bg-success
+                                    }
+                                    else if (Convert.ToInt32(Model.ulasim) == 3)
+                                    {
+                                      @:bg-warning
+                                    }
+                                    else if (Convert.ToInt32(Model.ulasim)<3)
+                                   {
+                                      @:bg-danger
+                                   }
+                                }
+
+                                ">
+                                    <div class="inner">
+                                        <h3>@Model.ulasim </h3>
+
+                                        <p>Web Sitemizi Yeterli Buldunuzmu ?</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                            <div class="col-lg-12">
+                                <!-- small card -->
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Müşteri Açıklaması </h3>
+
+                                        <p>@Model.aciklama</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- ./col -->
+                        </div>
+
+
+
+
+
+                    </div>
+                    <!-- /.card-body -->
+
+                </div>
+                <!-- /.card -->
+            </div>
+
+            <div class="col-md-12">
+                <div class="card card-success card-outline collapsed-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Anket İşlemleri (Onay&Bilgi)</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body" style="display: none;">
+                        @using (Html.BeginForm("AnketDetay", "Mesaj", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ID)
+                          
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <input type="submit" value="Anketi Onayla" class="btn btn-block btn-success btn-lg" />
+                                    <br />
+                                </div>
+                                <div class="col-md-12">
+                                    <a href="/Mesaj/AnketSil?ID=@Model.ID" class="btn btn-block btn-danger btn-lg">Anketi Kalıcı Olarak Sil</a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+        </div>
+    </div>
+    <!-- /.widget-user -->
+</div>
+
+
+
+
+
+
+<div class="col-md-12">
+    <div class="card card-warning card-outline">
+        <div class="card-header">
+            <h3 class="card-title">Müşterinin Profili</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <!-- /.card-tools -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Müşterinin Daha Önceki Rezervasyonları</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <th>Hizmet</th>
+                                        <th>Tarih</th>
+                                        <th>Kişi Sayısı</th>
+                                        <th style="width: 40px">Git</th>
+                                    </tr>
+                                    @foreach (var a in ViewBag.oncekirez)
+                                    {
+                                        <tr>
+                                            <td>@a.hizmet</td>
+                                            <td>@a.tarih</td>
+                                            <td>@a.kisi </td>
+                                            <td><a href="/Mesaj/RezervasyonDetay?RezID=@a.RezID" class="btn btn-default">Rezervasyona Git</a></td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Müşterinin Daha Önceki Mesajları</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <th>Konu</th>
+                                        <th>Tarih</th>
+
+                                        <th style="width: 40px">Git</th>
+                                    </tr>
+                                    @foreach (var a in ViewBag.oncekimesaj)
+                                    {
+                                        <tr>
+                                            <td>@a.konu</td>
+                                            <td>@a.tarih</td>
+
+                                            <td><a href="/Mesaj/MesajDetay?MID=@a.MID" class="btn btn-default">Mesaja Git</a></td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+
+@section script{
+    <script>
+            $(function () {
+
+                ClassicEditor
+                .create(document.querySelector('#aciklama'))
+                .then(function (editor) {
+                    // The editor instance
+                })
+                .catch(function (error) {
+                    console.error(error)
+                })
+            })
+    </script>
+
+
+}
+
+
+
+
+
+

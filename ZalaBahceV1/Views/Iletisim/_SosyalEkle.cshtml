@@ -1,0 +1,46 @@
+﻿@model ZalaBahceV1.Models.Sosyal
+
+@using (Html.BeginForm("_SosyalEkle", "Iletisim", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+{
+
+
+    <div class="form-horizontal">
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-2"><dt>Medya Adı: </dt></div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ad, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-2"><dt>Link: </dt></div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.link, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-2"><dt>İcon : </dt></div>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.icon, new { htmlAttributes = new { @class = "form-control" } })
+
+
+            </div>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col-md-10">
+
+
+            </div><div class="col-md-2">
+                <input type="submit" value="Ekle" class="btn btn-primary btn-lg col-md-12" />
+            </div>
+        </div>
+
+
+    </div>}
+

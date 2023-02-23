@@ -1,0 +1,375 @@
+﻿
+@{
+    ViewBag.Title = "UrunListe";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@model PagedList.IPagedList<ZalaBahceV1.Models.Urun>
+@using ZalaBahceV1.Models;
+@using PagedList
+@using PagedList.Mvc
+@section Baslik{ Ürün Liste }
+@section sitemap{Ürün Liste }
+@section title{Ürün Liste }
+@{
+    ZalaDB db = new ZalaDB();
+}
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h3 class="card-title">Ürün Liste</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#UrunEkle">Ürün Ekle</button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+
+        <table id="dene" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="5%">Kategori</th>
+                    <th width="5%">Adı</th>
+
+                    <th width="5%">Kapak Resim</th>
+                    <th width="5%">Durum</th>
+                    <th width="50%">İşlemler</th>
+
+                </tr>
+            </thead>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => i.UrunKategori.baslik)</td>
+                    <td>@i.urunAd</td>
+
+                    <td><img src="@i.kapakResim" width="45" height="45" /></td>
+                    <td>
+                        @if (i.aktif == "aktif")
+                        {
+                            <span class="badge bg-success ">Aktif</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Pasif</span>
+
+                        }
+                    </td>
+                    <td align="center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#UrunBilgi-@i.urunID"><i class="fa fa-info-circle"></i></button>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#UrunDuzenle-@i.urunID"><i class="fa fa-pencil-square-o"></i>Düzenle</button>
+                            @if (i.aktif == "aktif")
+                            {
+                                <a href="/Urun/durum?urunID=@i.urunID" class="btn btn-danger"><i class="fa fa-minus-square"></i>Pasif Yap</a>
+                            }
+                            else
+                            {
+                                <a href="/Urun/durum?urunID=@i.urunID" class="btn btn-success"><i class="fa fa-plus"></i>Aktif Yap</a>
+
+                            }
+                            <a id="btnAlert" href="/Urun/_UrunSil?urunID=@i.urunID" class="btn btn-danger"><i class="fa fa-trash"></i>Sil</a>
+                        </div>
+                    </td>
+                    <!-- Ürün Bilgi  Modal -->
+                    <div class="modal fade bd-example-modal-lg" id="UrunBilgi-@i.urunID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Ürün Detay</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <img class="d-block w-100" src="@i.kapakResim" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">Kategori</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(modelItem => i.UrunKategori.baslik)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">Ürün Adı</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">@i.urunAd</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">Açıklama</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">@i.aciklama</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">İçerik</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">@i.icerik</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">TR Fiyat</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">@i.TRFiyat</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">EN Fiyat</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">@i.ARFiyat</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12">
+                                            <div class="info-box bg-light">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text text-center text-muted">Durum</span>
+                                                    <span class="info-box-number text-center text-muted mb-0">@i.aktif</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                                    <button type="submit" class="btn btn-warning">Güncelle</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ürün Düzenle  Modal Son-->
+                    <!-- Ürün Düzenle  Modal -->
+                    <div class="modal fade bd-example-modal-lg" id="UrunDuzenle-@i.urunID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Ürün Düzenle @i.urunAd</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                @using (Html.BeginForm("_UrunGuncelle", "Urun", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+                                {<input type="text" style="display:none;" class="form-control" id="urunID" name="urunID" value="@i.urunID">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            @{
+                                                List<UrunKategori> k = db.UrunKategori.Where(x => x.kategoriID != i.katID).ToList();
+                                            }
+                                            <label>Kategori Seçiniz:</label>
+                                            <select class="form-control select2" name="KatID" id="KatID" style="width: 100%;">
+                                                <option selected="" value="@i.katID">@Html.DisplayFor(modelItem => i.UrunKategori.baslik)</option>
+                                                @foreach (var a in k)
+                                                {
+                                                    <option value="@a.kategoriID">@a.baslik</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="customFile">Ürün Resim:</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="attachment" id="attachment" value="@i.kapakResim">
+                                                <label class="custom-file-label" for="customFile">Eklemek İstediğiniz Resmi Seçiniz</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ürün Adı:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Ürün Adı Giriniz..." id="UrunAd" name="UrunAd" value="@i.urunAd">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ürün Açıklama:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                </div>
+                                                <textarea type="text" class="form-control" placeholder="Ürün Açıklama Giriniz..." id="aciklama" name="aciklama">@i.aciklama</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ürün İçerik:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                </div>
+                                                <textarea type="text" class="form-control" placeholder="Ürün İçeriği Giriniz..." id="icerik" name="icerik">@i.icerik</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ürün Fiyat (TR):</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Ürün Fiyatı(TR) Giriniz..." id="TRFiyat" name="TRFiyat" value="@i.TRFiyat">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ürün Fiyat(EN):</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="Ürün Fiyatı(EN) Giriniz..." id="ARFiyat" name="ARFiyat" value="@i.ARFiyat">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ürün Sira:</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-check"></i></span>
+                                                </div>
+                                                <input type="number" class="form-control" placeholder="Ürün Sırası Giriniz..." id="sira" name="sira" value="@i.sira">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                                        <button type="submit" class="btn btn-warning">Güncelle</button>
+                                    </div>
+                                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ürün Düzenle  Modal Son-->
+                </tr>
+                                                }
+            <tfoot>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Adı</th>
+
+                    <th>Kapak Resim</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+
+                </tr>
+            </tfoot>
+        </table>
+        <div class="center-block">
+            @Html.PagedListPager((IPagedList)Model, p => Url.Action("UrunListe", new { p })@*,new PagedListRenderOptions
+            {
+                LiElementClasses=new List<string>
+                {"page-link"}
+            }*@
+)
+        </div>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+
+<!-- Ürün Ekle  Modal -->
+<div class="modal fade bd-example-modal-lg" id="UrunEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ürün Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("_UrunEkle", "Urun", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Kategori Seçiniz:</label>
+                        <select class="form-control select2" name="KatID" id="KatID" style="width: 100%;">
+                            <option selected="" disabled="">Kategori Seçiniz</option>
+                            @foreach (var a in ViewBag.uKategori)
+                            {
+                                <option value="@a.kategoriID">@a.baslik</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="customFile">Ürün Resim:</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="attachment" id="attachment">
+                            <label class="custom-file-label" for="customFile">Eklemek İstediğiniz Resmi Seçiniz</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ürün Adı:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Ürün Adı Giriniz..." id="UrunAd" name="UrunAd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ürün Açıklama:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                            </div>
+                            <textarea type="text" class="form-control" placeholder="Ürün Açıklama Giriniz..." id="aciklama" name="aciklama"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ürün İçerik:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                            </div>
+                            <textarea type="text" class="form-control" placeholder="Ürün İçeriği Giriniz..." id="icerik" name="icerik"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ürün Fiyat (TR):</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Ürün Fiyatı(TR) Giriniz..." id="TRFiyat" name="TRFiyat">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ürün Fiyat(EN):</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Ürün Fiyatı(EN) Giriniz..." id="ARFiyat" name="ARFiyat">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ürün Sira:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-check"></i></span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Ürün Sırası Giriniz..." id="sira" name="sira" value="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Çık</button>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

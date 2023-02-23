@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "SifreDegistir";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+@model ZalaBahceV1.Models.Kullanici
+
+@section Baslik{ ŞİFRE DEĞİŞTİR }
+@section sitemap{ŞİFRE DEĞİŞTİR }
+@section title{ŞİFRE DEĞİŞTİR }
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>Şifre Değiştir</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Yeni Şifreyi Giriniz</p>
+            @using (Html.BeginForm("SifreDegistir", "Admin", FormMethod.Post, new { @class = "form-horizontal", @id = "form_sample_1", @enctype = "multipart/form-data" }))
+            {
+
+                <div class="form-group has-feedback">
+                    <div class="row">
+                        <div class="col-md-1"><span class="fa fa-lock form-control-feedback"></span></div>
+                        <div class="col-md-11"><input type="password" name="pw" class="form-control" placeholder="Şifre Giriniz"></div>
+                    </div>
+
+
+                </div>
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-warning btn-block btn-flat">Degiştir</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+            }
+
+
+        </div>
+        <!-- /.login-card-body -->
+    </div>
+</div>
+

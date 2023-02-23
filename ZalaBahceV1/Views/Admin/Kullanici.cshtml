@@ -1,0 +1,137 @@
+﻿
+@{
+    ViewBag.Title = "Kullanici";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+
+
+@section Baslik{ KULLANICI AYARLARI }
+@section sitemap{KULLANICI AYARLARI }
+@section title{KULLANICI AYARLARI }
+@model IEnumerable<ZalaBahceV1.Models.Kullanici>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card card-info card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    KULLANICI LİSTESİ
+                    <small>Silme İşlemleri Buradan Yapılır</small>
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="mb-3">
+
+                    @*------------content start------------*@
+
+
+                    <table id="urunkatliste" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Ad Soyad</th>
+                                <th width="5%">Kullanici Adi</th>
+                                <th>Sifre</th>
+                                <th>Yetki</th>
+                                <th>Mail</th>
+                                <th width="41%">Son Giriş</th>
+                                <th width="33%">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model)
+                            {
+
+
+                                <tr>
+                                    <td>@i.ID</td>
+                                    <td>@i.adsoyad</td>
+                                    <td>@i.ka</td>
+                                    <td>*******</td>
+                                    <td>@i.yetki</td>
+                                    <td>@i.mail</td>
+                                    <td>@i.songiris</td>
+
+                                    <td align="center">
+                                        <div class="btn-group">
+                                            <a id="btnAlert" href="/Admin/KullaniciSil?ID=@i.ID" class="btn btn-danger"><i class="fa fa-trash"></i>Kullanici Sil</a>
+                                        </div>
+                                    </td>
+
+
+
+
+                                </tr>  }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th width="5%">ID</th>
+                                <th width="15%">Ad Soyad</th>
+                                <th width="5%">Kullanici Adi</th>
+                                <th>Sifre</th>
+                                <th>Yetki</th>
+                                <th>Mail</th>
+                                <th width="41%">Son Giriş</th>
+                                <th width="33%">İşlem</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    @*--------------content end--------------*@
+                </div>
+                <p class="text-sm mb-0">
+
+                </p>
+            </div>
+        </div>
+
+        @*------------card end----------------*@
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-success card-outline">
+            <div class="card-header">
+                <h3 class="card-title">
+                    KULLANICI EKLE
+                </h3>
+                <!-- tools box -->
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool btn-sm"
+                            data-widget="collapse"
+                            data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+               
+                @Html.Action("_KullaniciEkle", "Admin")
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*------------card end----------------*@
+
+
+
+
+

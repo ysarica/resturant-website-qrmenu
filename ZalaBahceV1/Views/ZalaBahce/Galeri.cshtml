@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Galeri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<ZalaBahceV1.Models.Galeri>
+
+<div class="g-bg-position--center js__parallax-window" style="background: url(/Resim/Hakkimizda/as.jpg) 50% 0 no-repeat fixed;">
+    <div class="g-container--md g-text-center--xs g-padding-y-150--xs">
+        <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">ZALA BAHÇE</p>
+        <h1 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white g-letter-spacing--1">ZALA BAHÇE'den Görüntüler</h1>
+    </div>
+</div>
+
+
+<!-- Portfolio Gallery -->
+<div class="container">
+    <br />
+    <br />
+    <div class="g-text-center--xs g-margin-b-100--xs">
+        <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">ZALA BAHÇE</p>
+        <h2 class="g-font-size-32--xs g-font-size-36--md">ZALA BAHÇE'den Görüntüler</h2>
+    </div>
+    <div id="js__grid-portfolio-gallery" class="cbp">
+        @foreach (var a in Model)
+        {
+
+        
+        <!-- Item -->
+        <div class="s-portfolio__item cbp-item">
+            <div class="s-portfolio__img-effect">
+                <img src="@a.resim" alt="Portfolio Image">
+            </div>
+            <div class="s-portfolio__caption-hover--cc">
+                <div class="g-margin-b-25--xs">
+                    <h3 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">@a.Baslik</h3>
+                    <p class="g-color--white-opacity">@a.aciklama</p>
+                </div>
+                <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
+                    <li>
+                        <a href="@a.resim" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle" data-title="@a.Baslik">
+                            <i class="ti-fullscreen"></i>
+                        </a>
+                    </li>
+                  
+                </ul>
+            </div>
+        </div>}
+      
+    </div>
+    <!-- End Portfolio Gallery -->
+</div>
+<!-- End Portfolio --><br />
+<br />
+@Html.Action("_Contact", "ZalaBahce")
+@section script{ 
+    
+    <!-- Vendor -->
+<script type="text/javascript" src="/vendor/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/jquery.migrate.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/vendor/jquery.smooth-scroll.min.js"></script>
+<script type="text/javascript" src="/vendor/jquery.back-to-top.min.js"></script>
+<script type="text/javascript" src="/vendor/scrollbar/jquery.scrollbar.min.js"></script>
+<script type="text/javascript" src="/vendor/swiper/swiper.jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+<script type="text/javascript" src="/vendor/jquery.wow.min.js"></script>
+<!-- General Components and Settings -->
+<script type="text/javascript" src="/js/global.min.js"></script>
+<script type="text/javascript" src="/js/components/header-sticky.min.js"></script>
+<script type="text/javascript" src="/js/components/scrollbar.min.js"></script>
+<script type="text/javascript" src="/js/components/swiper.min.js"></script>
+<script type="text/javascript" src="/js/components/portfolio-3-col.min.js"></script>
+<script type="text/javascript" src="/js/components/wow.min.js"></script>
+<!--========== END JAVASCRIPTS ==========-->
+    
+    
+      }

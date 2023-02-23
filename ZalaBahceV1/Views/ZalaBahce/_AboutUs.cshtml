@@ -1,48 +1,41 @@
-﻿
+﻿@model IEnumerable<ZalaBahceV1.Models.Hakkimizda>
 <!-- About -->
-<div class="container g-padding-y-80--xs g-padding-y-125--sm">
-    <div class="row g-margin-b-10--xs">
-        <div class="col-md-6 g-margin-b-60--xs g-margin-b-0--lg">
-            <!-- Masonry Grid -->
-            <div class="row g-row-col--5 g-overflow--hidden js__masonry">
-                <div class="col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--sm js__masonry-item">
-                    <div class="wow fadeInDown" data-wow-duration=".3" data-wow-delay=".1s">
-                        <img class="img-responsive" src="~/img/hakkimizda/zalah0.png" alt="Zala Bahçe">
+@foreach (var i in Model)
+{
+    <div class="container g-padding-y-80--xs g-padding-y-125--sm">
+        <div class="row g-margin-b-10--xs">
+            <div class="col-md-6 g-margin-b-60--xs g-margin-b-0--lg">
+                <!-- Masonry Grid -->
+                <div class="row g-row-col--5 g-overflow--hidden js__masonry">
+                    <div class="col-xs-6 g-full-width--xs g-margin-b-10--xs g-margin-b-0--sm js__masonry-item">
+                        <div class="wow fadeInDown" data-wow-duration=".3" data-wow-delay=".1s">
+                            <img class="img-responsive" src="@i.resim1" alt="Zala Bahçe">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 g-full-width--xs g-margin-b-10--xs js__masonry-item">
+                        <div class="wow fadeInRight" data-wow-duration=".3" data-wow-delay=".3s">
+                            <img class="img-responsive" src="@i.resim2" alt="Tarabya">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 g-full-width--xs js__masonry-item">
+                        <div class="wow fadeInRight" data-wow-duration=".3" data-wow-delay=".5s">
+                            <img class="img-responsive" src="@i.resim3" alt="Resturant">
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-6 g-full-width--xs g-margin-b-10--xs js__masonry-item">
-                    <div class="wow fadeInRight" data-wow-duration=".3" data-wow-delay=".3s">
-                        <img class="img-responsive" src="~/img/hakkimizda/zalah1.jpg" alt="Mükemmel Kahve">
-                    </div>
-                </div>
-                <div class="col-xs-6 g-full-width--xs js__masonry-item">
-                    <div class="wow fadeInRight" data-wow-duration=".3" data-wow-delay=".5s">
-                        <img class="img-responsive" src="~/img/hakkimizda/zalah2.jpg" alt="Huzurlu Ortam">
-                    </div>
-                </div>
+                <!-- End Masonry Grid -->
             </div>
-            <!-- End Masonry Grid -->
-        </div>
-        <div class="col-md-5 g-margin-b-10--xs g-margin-b-0--lg g-margin-t-10--lg g-margin-l-20--lg">
-            <div class="g-margin-b-30--xs">
-                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-15--xs">Biz Kimiz ?</p>
-                <h2 class="g-font-size-32--xs g-font-size-36--sm">Hakkımızda</h2>
-                <p>Zala Bahçe, Sarıyer Tarabya'da bir hayalin neticesinde, siz değerli konuklarına eşsiz sunumları, damağınıza hitap edecek farklı tatları ve tabiki kendinizi huzurlu ve rahat hissedebileceğiniz iç ve dış mekanı ile hizmet vermek üzere kurulmuştur.</p>
-            </div>
-            <div class="row">
-                <ul class="list-unstyled col-xs-4 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
-                    <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Kahvaltı </li>
-                    <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Dogum Günü </li>
-                    <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Toplantılar</li>
-                    <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Mezuniyetler</li>
-                </ul>
-                <ul class="list-unstyled col-xs-4 g-full-width--xs g-ul-li-tb-5--xs g-margin-b-20--xs g-margin-b-0--sm">
-                    <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Evlilik Teklifi</li>
-                    <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Kutlamalar</li>
-                    <li><i class="g-font-size-12--xs g-color--primary g-margin-r-10--xs ti-check"></i>Motivasyon Yemekleri</li>
-                </ul>
+            <div class="col-md-5 g-margin-b-10--xs g-margin-b-0--lg g-margin-t-10--lg g-margin-l-20--lg">
+                <div class="g-margin-b-30--xs">
+                    <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-15--xs">@i.baslik1</p>
+                    <h2 class="g-font-size-32--xs g-font-size-36--sm">@i.baslik2</h2>
+                    <p>@i.ozet</p>
+                </div>
+                <div class="row">
+                    @Html.Action("_Hizmetler", "ZalaBahce")
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- End About -->
+    <!-- End About -->
+}

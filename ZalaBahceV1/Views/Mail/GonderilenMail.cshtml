@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "GonderilenMail";
+    Layout = "~/Views/Shared/_ZalaAdmin.cshtml";
+}
+@model IEnumerable<ZalaBahceV1.Models.GonderilenMail>
+@section Baslik{GÖNDERİLEN MAİL }
+@section sitemap{GÖNDERİLEN MAİL}
+@section title{GÖNDERİLEN MAİL}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Action("_Menu", "Mail")
+
+            </div>
+            <div class="col-md-9">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Gönderilen Mail</h3>
+
+                       
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                   
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    @foreach (var a in Model.OrderByDescending(x=> x.ID))
+                                    {
+                                        <tr>
+                                            <td><a class="btn btn-danger" href="/Mail/MailSil?ID=@a.ID">Sil</a></td>
+                                            <td class="mailbox-star"><a href="/Mail/MailDetay?ID=@a.ID"><i class="fa fa-star text-warning"></i>@a.ID</a></td>
+                                            <td class="mailbox-name"><a href="/Mail/MailDetay?ID=@a.ID">@a.gönderilen</a></td>
+                                            <td class="mailbox-subject"> @a.konu</td>
+                                            <td class="mailbox-date">@a.tarih</td>
+                                        </tr>
+                                    }
+                                    
+                                  
+                                </tbody>
+                            </table>
+                            <!-- /.table -->
+                        </div>
+                        <!-- /.mail-box-messages -->
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer p-0">
+                    
+                    </div>
+                </div>
+                <!-- /. box -->
+            </div>
+        </div>
+        </div></section>

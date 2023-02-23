@@ -12,13 +12,13 @@ namespace ZalaBahceV1.Models
         [Key]
         public int ayarID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string logo1 { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string logo2 { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string title { get; set; }
 
         [StringLength(320)]
@@ -28,5 +28,14 @@ namespace ZalaBahceV1.Models
 
         [StringLength(50)]
         public string ziyaretgün { get; set; }
+
+        [StringLength(50)]
+        public string siteoff { get; set; }
+
+        [StringLength(150)]
+        public string siteurl { get; set; }
+
+        [StringLength(150)]
+        public string firmaadi { get; set; }
     }
 }

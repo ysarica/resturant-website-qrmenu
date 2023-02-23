@@ -12,8 +12,8 @@ namespace ZalaBahceV1.Models
         [Key]
         public int RezID { get; set; }
 
-        [StringLength(50)]
-        public string AdSoyad { get; set; }
+        [StringLength(150)]
+        public string adsoyad { get; set; }
 
         [StringLength(50)]
         public string mail { get; set; }
@@ -21,17 +21,28 @@ namespace ZalaBahceV1.Models
         [StringLength(50)]
         public string telefon { get; set; }
 
-        [StringLength(50)]
-        public string cinsiyet { get; set; }
-
-        [StringLength(50)]
-        public string dogumTarihi { get; set; }
-
         public string adres { get; set; }
 
         [StringLength(50)]
         public string hizmet { get; set; }
 
+        [StringLength(50)]
+        public string kisi { get; set; }
+
         public string mesaj { get; set; }
+
+        public string aciklama { get; set; }
+
+        [StringLength(50)]
+        public string okundu { get; set; }
+
+        [StringLength(150)]
+        public string tarih { get; set; }
+
+        [StringLength(250)]
+        public string pTarih { get; set; }
+
+        [StringLength(50)]
+        public string pSaat { get; set; }
     }
 }

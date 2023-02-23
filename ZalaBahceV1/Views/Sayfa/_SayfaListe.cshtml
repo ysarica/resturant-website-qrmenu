@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ZalaBahceV1.Models.Sayfalar>
+
+@foreach (var a in Model)
+{
+    <li class="nav-item">
+        <a href="/Sayfa/SayfaDuzenle?SaID=@a.SaID" class="nav-link">
+            <i class="fa fa-circle-o nav-icon"></i>
+            <p>@a.baslik</p>
+        </a>
+    </li>
+}

@@ -12,10 +12,13 @@ namespace ZalaBahceV1.Models
         [Key]
         public int SID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string ad { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string link { get; set; }
+
+        [StringLength(150)]
+        public string icon { get; set; }
     }
 }

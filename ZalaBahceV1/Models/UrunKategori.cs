@@ -18,13 +18,14 @@ namespace ZalaBahceV1.Models
         [Key]
         public int kategoriID { get; set; }
 
-        [StringLength(100)]
+        [StringLength(500)]
         public string resim { get; set; }
 
-        [StringLength(50)]
+        [StringLength(250)]
         public string baslik { get; set; }
+        public int sira { get; set; }
 
-        [StringLength(50)]
+
         public string aciklama { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

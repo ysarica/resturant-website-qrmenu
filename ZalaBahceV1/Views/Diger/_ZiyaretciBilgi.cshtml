@@ -1,0 +1,90 @@
+﻿
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box bg-info">
+            <span class="info-box-icon"><i class="ion ion-person-add"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Toplam Ziyaretçi</font></font></span>
+                <span class="info-box-number"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.toplamziyaretci</font></font></span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                <span class="progress-description">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                           
+                        </font>
+                    </font>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box bg-success">
+            <span class="info-box-icon"><i class="ion ion-stats-bars"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ortalama Günlük Ziyaretci</font></font></span>
+                <span class="info-box-number"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.ortziyaretci</font></font></span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                <span class="progress-description">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            
+                        </font>
+                    </font>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box bg-warning">
+            <span class="info-box-icon"><i class="ion ion-pie-graph"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Toplam Gün Sayısı</font></font></span>
+                <span class="info-box-number"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ViewBag.günsayisi</font></font></span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                <span class="progress-description">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                        </font>
+                    </font>
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+@if (Session["Yetki"].ToString() == "Yetkili")
+{
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <a class="info-box-icon bg-danger" href="/Diger/ZiyaretciDetay"><i class="ion ion-stats-bars"></i></a>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Tüm İstatistikler</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+}
+    <!-- /.col -->
+</div>
+

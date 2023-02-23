@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "MenuKategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<ZalaBahceV1.Models.UrunKategori>
+<section class="s-video-v2__bg" data-vidbg-bg="mp4: /Resim/Genel/menu.mp4, webm: /Resim/Genel/menu.mweb, poster: /Resim/Genel/menu.jpg" data-vidbg-options="loop: true, muted: true, overlay: false">
+    <div class="container g-position--overlay g-text-center--xs">
+        <div class="g-padding-y-50--xs g-margin-t-100--xs g-margin-b-100--xs g-margin-b-250--md">
+            <h1 class="g-font-size-36--xs g-font-size-50--sm g-font-size-60--md g-color--white">Menü</h1>
+            <br /><br />
+
+
+
+
+
+            <div class="container g-bg-color--white g-box-shadow__dark-lightest-v3 g-padding-x-40--xs g-padding-y-50--xs">
+                <div class="row">
+                    <h2 class="g-font-size-24--xs g-color--primary g-margin-b-10--xs">Kategoriler</h2>
+                    <div class="col-lg-12">
+
+                            @foreach (var i in Model)
+                            {
+                                <a href="/Zalabahce/Menu?KategoriID=@i.kategoriID">
+                                    <div class="col-sm-4 g-margin-b-30--xs g-margin-b-0--md text-center">
+                                        
+                                        <!-- News -->
+                                        <article>
+                                            <img style="max-height:333px;  min-height:333px;" class="img-responsive" src="@i.resim" alt="@i.baslik">
+                                            <div class="g-bg-color--white g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs">
+                                                <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2">@i.baslik</p>
+                                            </div>
+                                        </article>
+                                        <!-- End News -->
+                                    </div>
+                                </a>
+                            }
+                        
+
+
+
+                    </div>
+
+
+
+                    @Html.Action("_Markalar", "Zalabahce")
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>

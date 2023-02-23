@@ -1,0 +1,250 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title> S R C | Rezervasyon</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/plugins/iCheck/flat/blue.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="/plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="/plugins/fullcalendar/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap4.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+
+    <script src="/plugins/chartjs-old/Chart.min.js"></script>
+
+
+
+    <script src="/dist/sweetalert2.all.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+
+
+    <link href="/dist/sweetalert2.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    <br />
+    <div class="row">
+        <div class="container">
+            @using ZalaBahceV1.Models;
+
+            @{
+                ZalaDB db = new ZalaDB();
+                int okunmamisrezsayi = 0;
+                double t = Convert.ToDouble(DateTime.Now.ToString("yyyy/MM/dd"));
+                List<Rezervasyon> okunmamislist = db.Rezervasyon.Where(x => x.okundu == "Onaylanmamis").ToList();
+                foreach (var i in okunmamislist.OrderBy(x => x.pTarih))
+                {
+                    if (Convert.ToDouble(i.pTarih) > t)
+                    {
+                        okunmamisrezsayi++;
+                    }
+                }
+            }
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.Action("_RezEkle", "Rez")
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">İşlemler</h3>
+                            <div class="card-tools">
+                              
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column">
+                                <li class="nav-item active">
+                                    <a href="/Rez/Hosgeldiniz/" class="nav-link">
+                                        Rezervasyonlar
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Rez/Onaylanmamis" class="nav-link">
+                                     Onaylanmamış<span class="badge bg-primary float-right">@okunmamisrezsayi</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Rez/Iptal/" class="nav-link">
+                                        <i class="far fa-file-alt"></i> İptal
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Rez/Gecmis/" class="nav-link">
+                                        <i class="far fa-file-alt"></i> Geçmiş
+                                    </a>
+                                </li>
+                                @*<li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-filter"></i> Junk
+                                        <span class="badge bg-warning float-right">65</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-trash-alt"></i> Trash
+                                    </a>
+                                </li>*@
+                            </ul>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    @*<div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Labels</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills flex-column">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle text-danger"></i>
+                                        Important
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle text-warning"></i> Promotions
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle text-primary"></i>
+                                        Social
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                         /.card-body 
+                    </div>*@
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- /.control-sidebar -->
+    <!-- ./wrapper -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+  $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="/plugins/morris/morris.min.js"></script>
+    <!-- Sparkline -->
+    <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="/plugins/knob/jquery.knob.js"></script>
+    <!-- daterangepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="/plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/dist/js/adminlte.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="/dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/dist/js/demo.js"></script>
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <!-- DataTables -->
+    <script src="/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/plugins/datatables/dataTables.bootstrap4.js"></script>
+
+    <script src="/plugins/ckeditor/ckeditor.js"></script>
+    <script src="/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="/plugins/select2/js/select2.full.min.js"></script>
+
+
+
+
+
+
+
+
+    <script>
+            $(function () {
+
+                $('#urunkatliste').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": false,
+                    "info": true,
+                    "autoWidth": true
+                });
+
+                $('#dene').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true
+                });
+            });
+    </script>
+    @RenderSection("script", false)
+    <script>
+        $(function () {
+            //Add text editor
+            $('#Mesaj').summernote()
+            $('.select2').select2()
+            $('[data-mask]').inputmask()
+
+        })
+
+    </script>
+</body>
+</html>
